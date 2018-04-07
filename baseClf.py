@@ -22,30 +22,38 @@ def main():
     for trial in range(10):
     	kfs.append(model_selection.KFold(n_splits = 10, shuffle = True, random_state = trial))
 
-    means = []
-    stds = []
+    test_means = []
+    test_stds = []
+    train_means = []
+    train_stds = []
     for i in range(len(y[0])):
     	if not i == 8:
     		clf_i = SVC(kernel = 'linear')
     		y_i = y[:,i]
-    		scores = []
+    		test_scores = []
+    		train_scores = []
     		for i in range(10):
     			X_train = np.append(X[:20*i],X[20*(i+1):],axis = 0)
     			y_train = np.append(y_i[:20*i],y_i[20*(i+1):],axis = 0)
     			X_test = X[20*i:20*(i+1)]
     			y_test = y_i[20*i:20*(i+1)]
     			clf_i.fit(X_train,y_train)
-    			scores.append(clf_i.score(X_test,y_test))
-    		mean = np.mean(scores)
-    		std = np.std(scores)
+    			test_scores.append(clf_i.score(X_test,y_test))
+    			train_scores.append(clf_i.score(X_train, y_train))
+    		test_mean = np.mean(test_scores)
+    		test_std = np.std(test_scores)
+    		train_mean = np.mean(train_scores)
+    		train_std = np.std(train_scores)
     	else:
     		mean = 1.0*201/202
     		std = 0
-    	means.append(mean)
-    	stds.append(std)	
+    	test_means.append(test_mean)
+    	test_stds.append(test_std)	
+    	train_means.append(train_mean)
+    	train_stds.append(train_std)
 
-    means = tuple(means)
-    stds = tuple(stds)
+    test_means = tuple(test_means)
+    train_stds = tuple(test_stds)
 
     N = len(y[0])
 
@@ -53,12 +61,19 @@ def main():
     width = 0.35       # the width of the bars
 
     fig, ax = plt.subplots()
-    rects1 = ax.bar(ind, means, width, color='r', yerr=stds)
+    rects1 = ax.bar(ind, test_means, width, color='r', yerr=test_stds)
+
+    train_means = tuple(train_means)
+    train_stds = tuple(train_stds)
+    rects2 = ax.bar(ind + width, train_means, width, color='y', yerr=train_stds)
 
     # add some text for labels, title and axes ticks
     ax.set_ylabel('Accuracy')
-    ax.set_title('Accuracies by Classifier')
-    ax.set_xticks(ind + width)
+    ax.set_title('Accuracies by Classifier, Training and Test')
+    ax.set_xticks((ind + width) * 0.5)
+    ax.set_xticklabels(('Test Accuraccy', 'Training Accuraccy'))
+
+    ax.legend((rects1[0], rects2[0]), ('Test', 'Train'))
 
 
     plt.show()
