@@ -209,7 +209,7 @@ def main() :
 	print X
 	y = create_y_data()
 	print y
-
+ 	print np.sum(y, axis=0)
 	
 
 
