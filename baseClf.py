@@ -6,68 +6,6 @@ import matplotlib.pyplot as plt
 
 from sklearn.svm import SVC
 from sklearn import model_selection
-from sklearn import metrics
-
-def cv_performance(clf, train_data_X, train_data_y, kfs) :
-    """
-    Determine classifier performance across multiple trials using cross-validation
-    
-    Parameters
-    --------------------
-        clf        -- classifier
-        train_data -- Data, training data
-        kfs        -- array of size n_trials
-                      each element is one fold from model_selection.KFold
-    
-    Returns
-    --------------------
-        scores     -- numpy array of shape (n_trials, n_fold)
-                      each element is the (accuracy) score of one fold in one trial
-    """
-    
-    n_trials = len(kfs)
-    n_folds = kfs[0].n_splits
-    scores = np.zeros((n_trials, n_folds))
-    
-    ### ========== TODO : START ========== ###
-    # part b: run multiple trials of CV
-    for trial in range(n_trials):
-    	scores[trial] = cv_performance_one_trial(clf, train_data_X, train_data_y, kfs[trial])
-    ### ========== TODO : END ========== ###
-    
-    return scores
-
-
-def cv_performance_one_trial(clf, train_data_X, train_data_y, kf) :
-    """
-    Compute classifier performance across multiple folds using cross-validation
-    
-    Parameters
-    --------------------
-        clf        -- classifier
-        train_data -- Data, training data
-        kf         -- model_selection.KFold
-    
-    Returns
-    --------------------
-        scores     -- numpy array of shape (n_fold, )
-    				 each element is the (accuracy) score of one fold
-    """
-    
-    scores = np.zeros(kf.n_splits)
-    
-    ### ========== TODO : START ========== ###
-    # part b: run one trial of CV
-    for train_index, test_index in kf.split(train_data_X):
-    	i = 0
-    	X_train, X_test = train_data_X[train_index], train_data_X[test_index]
-    	y_train, y_test = train_data_y[train_index], train_data_y[test_index]
-    	clf.fit(X_train, y_train)
-    	scores[i] = clf.score(X_test, y_test)
-    	++i
-    ### ========== TODO : END ========== ###
-    
-    return scores
 
 
 def main():
@@ -90,9 +28,16 @@ def main():
     	if not i == 8:
     		clf_i = SVC(kernel = 'linear')
     		y_i = y[:,i]
-    		score = cv_performance(clf_i, X, y_i, kfs).flatten()
-    		mean = np.mean(score)
-    		std = np.std(score)
+    		scores = []
+    		for i in range(10):
+    			X_train = np.append(X[:20*i],X[20*(i+1):],axis = 0)
+    			y_train = np.append(y_i[:20*i],y_i[20*(i+1):],axis = 0)
+    			X_test = X[20*i:20*(i+1)]
+    			y_test = y_i[20*i:20*(i+1)]
+    			clf_i.fit(X_train,y_train)
+    			scores.append(clf_i.score(X_test,y_test))
+    		mean = np.mean(scores)
+    		std = np.std(scores)
     	else:
     		mean = 1.0*201/202
     		std = 0
