@@ -12,6 +12,10 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 
 
+######################################################################
+# extracting tokens from xml
+######################################################################
+
 def get_text_from_xml(filename, stripPunc = True, removeStopwords = True):
 	"""
 	Takes in a xml file and returns an array of strings representing tokens in 
@@ -53,37 +57,10 @@ def get_all_text_from_xml():
 	"""
 	text_array = []
 
-	for filename in os.listdir("train"):
-		text_array.append(get_text_from_xml(os.path.join("train", filename)))
+	for filename in os.listdir("train"): # loops over files in xml directory
+		text_array.append(get_text_from_xml(os.path.join("train", filename))) # appends text from each file to text_array
 
 	return text_array
-
-def get_all_text():
-	"""
-	Gets all text from train_text directory
-	"""
-	text_array = []
-
-	for filename in os.listdir("train_text"):
-		file = open(os.path.join("train_text", filename), "r")
-		words = file.read()
-		text_array.append(words.split())
-
-	return text_array
-
-def write_text_to_files(text_array):
-	"""
-	Loops over files in text_array and writes each file to a train_text 
-	directory
-	"""
-	text_directory = os.path.join(os.getcwd(), r'train_text')
-	if not os.path.exists(text_directory):
-   		os.makedirs(text_directory)
-
-	for i in range(len(text_array)):
-		filename = os.path.join('train_text', "filenum" + str(i) + '.txt')
-		np.savetxt(filename, text_array[i], fmt='%s', newline=' ')
-
 
 def get_labels_from_xml(filename):
 	"""
@@ -97,60 +74,149 @@ def get_labels_from_xml(filename):
     	--------------------
         label_vector			-- np array of 1s and 0s. A 1 represents the tag was met, 0 is not met
 	"""
-	dom = parse(filename)
+	dom = parse(filename) # parse the xml file
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
 				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
 				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 
-	tag_values = [dom.getElementsByTagName(tag_names[i])[0].getAttribute("met") for i in range(12)]
+	tag_values = [dom.getElementsByTagName(tag_names[i])[0].getAttribute("met") for i in range(12)] # get "met" or "not met" for each tag
 
-	label_vector = [1 if tag_values[i] == "met" else 0 for i in range(12)]
+	label_vector = [1 if tag_values[i] == "met" else 0 for i in range(12)] # make label vector for file 
 
 	return np.array(label_vector)
 
-
-def create_y_data():
+def get_all_labels_from_xml():
 	"""
-	Loops over files in directory, and gets label vectors from all 202 input xml files.
-	Returns array of length 202 with lebel vectors arrays in each entry
-
-	Returns
-    --------------------
-        label_matrix				-- np matrix of shape (202, 12) of label vectors for each xml file
+	Gets all labels from all files
 	"""
-	label_matrix = np.zeros((202, 12))
+	labels_array = []
 
-	ind = 0
 	for filename in os.listdir("train"):
-		label_matrix[ind] = get_labels_from_xml(os.path.join("train", filename))
-		ind+=1
+		labels_array.append(get_labels_from_xml(os.path.join("train", filename)))
 
-	return label_matrix
+	return labels_array
+
+
+######################################################################
+# text preprocessing
+######################################################################
+
+def get_all_text():
+	"""
+	Gets all text from train_text directory
+	"""
+	text_array = []
+
+	for filename in os.listdir("train_text"): # loop through files in text directory
+		file = open(os.path.join("train_text", filename), "r")
+		words = file.read()
+		text_array.append(words.split()) # append words from file to text_array
+
+	return text_array
+
+def write_text_to_files(text_array):
+	"""
+	Loops over text for each of the input xml files in text_array 
+	and writes the text to a train_text directory
+	"""
+	text_directory = os.path.join(os.getcwd(), r'train_text') 
+
+	if not os.path.exists(text_directory):
+   		os.makedirs(text_directory) # create new train_text directory
+
+	for i in range(len(text_array)):
+		filename = os.path.join('train_text', "filenum" + str(i) + '.txt')
+		np.savetxt(filename, text_array[i], fmt='%s', newline=' ') # write text to file
+
+def get_all_labels():
+	"""
+	Gets all labels from train_labels directory
+	"""
+	labels_array = []
+
+	for filename in os.listdir("train_labels"):
+		file = open(os.path.join("train_labels", filename), "r")
+		words = file.read()
+		labels_array.append(words.split('\n')[:-1])
+
+	return labels_array
+
+def write_labels_to_files(labels_array):
+	"""
+	Loops over labels for each of the input xml files in labels_array
+	and writes the text to a train_labels directory
+	"""
+
+	labels_directory = os.path.join(os.getcwd(), r'train_labels')
+
+	if not os.path.exists(labels_directory):
+		os.makedirs(labels_directory)
+
+	for i in range(len(labels_array)):
+		filename = os.path.join('train_labels', 'filenum' + str(i) + '.txt')
+		np.savetxt(filename, labels_array[i], fmt='%d')
 
 def get_text_dictionary(text_array):
 	"""
-	Takes in a array of string arrays and returns dictionary of word counts for the input
+	Takes in an array of string arrays and returns dictionary of word counts for the input
+	and the number of distinct words
 	"""
 	word_counts = defaultdict(int)
 
 	for text in text_array:
-		for word in text:
+		for word in text: # count number of occurences for each word
 			word_counts[word]+=1
 
-	return word_counts
+	return word_counts, len(word_counts)
+
+def get_text_dictionary_split(text_array, labels_array, i, avg=False):
+	"""
+	Tkes in an array of string arrays, an array of the corresponding labels, an
+	integer i representing a split on the feature i and a bool flag avg. 
+	"""
+	word_counts_met = defaultdict(int) # initalize dictionaries for met and not met
+	word_counts_not = defaultdict(int)
+
+	met_count = 0
+	not_count = 0
+
+	for j in range(len(text_array)):
+		met = labels_array[j][i] == '1' # if the class was met in the given file
+		if met:
+			met_count+=1
+		else:
+			not_count+=1
+		for word in text_array[j]:
+			if met:
+				word_counts_met[word]+=1 # count occurences
+			else:
+				word_counts_not[word]+=1 # count occurences
+
+	if avg:
+		word_counts_met = {k: v/met_count for k,v in word_counts_met.iteritems()} # get averages for each dict
+		word_counts_not = {k: v/not_count for k,v in word_counts_not.iteritems()}
+		print met_count
+		print not_count
+
+	return word_counts_met, word_counts_not
+
+
+######################################################################
+# data visualization
+######################################################################
 
 def plot_common_words(word_counts, k):
 	"""
 	Takes in a word counts dictionary and outputs a barchart of the k most used words
 	"""
-	ind = np.arange(k)
-	width = 2.0/k
+	ind = np.arange(k) # indicies of each word
+	width = 2.2/k # width of each bar
 
-	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True)
+	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True) # sort words by num appearances
 	
-	labels = [sorted_counts[i][0] for i in range(k)]
-	counts = [sorted_counts[i][1] for i in range(k)]
+	labels = [sorted_counts[i][0] for i in range(k)] # labels of each bar
+	counts = [sorted_counts[i][1] for i in range(k)] # count for each bar
 
 
 	fig, ax = plt.subplots()
@@ -164,6 +230,47 @@ def plot_common_words(word_counts, k):
 
 	plt.show()
 
+def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
+	"""
+	Plots 12 stacked bar charts (one for each label class). Each stacked bar chart displays
+	the k most common words. The stacks are the counts for a given word in the files where
+	the given feature was "met" and "not met".
+	"""
+
+	ind = np.arange(k)
+	width = 4.0/k if avg else 2.0/k
+
+	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
+				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
+
+	for i in range(12):
+		sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True) # sort words by num appearances
+	
+		labels = [sorted_counts[j][0] for j in range(k)] # labels of each bar
+
+		word_counts_met, word_counts_not = get_text_dictionary_split(text_array, labels_array, i, avg) # get word counts for met and not met
+
+		met_counts = [word_counts_met[labels[j]] for j in range(k)] # word counts for met
+		not_counts = [word_counts_not[labels[j]] for j in range(k)] # word counts for not met
+
+		p1 = plt.bar(ind, met_counts, width, color='r') # create splits for bar chart
+		p2 =  plt.bar(ind + width, not_counts, width, color='y') if avg \
+		else plt.bar(ind, not_counts, bottom=met_counts)
+
+		plt.ylabel('Counts')
+		title = 'Counts of Most Common Words Split on ' + tag_names[i] + ' Avg' if avg \
+				else 'Counts of Most Common Words Split on ' + tag_names[i] + ' Met/Not Met'
+		plt.title(title)
+		plt.xticks(ind + (avg*width/2), labels)
+		plt.legend((p1[0], p2[0]), ('Met most common words', 'Not met most common words'))
+
+		plt.show()
+
+
+######################################################################
+# create X and y data
+######################################################################
 
 def create_X_data(text_array, word_counts, d, j):
 	"""
@@ -183,34 +290,68 @@ def create_X_data(text_array, word_counts, d, j):
 			feature_matrix		-- np array of shape (202, d) representing features 
 	"""
 	n = len(text_array)
-	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True)
-	words = [sorted_counts[i][0] for i in range(d)]
-	feature_matrix = np.zeros((n, d))
+	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True) # sort words by appearances
+
+	words = [sorted_counts[i][0] for i in range(d)] # get d most used words
+	feature_matrix = np.zeros((n, d)) # create feature matrix
 
 	for i in range(n):
-		text = text_array[i]
-		curr_counts = get_text_dictionary([text])
+		text = text_array[i] # text from file i
+		curr_counts = get_text_dictionary([text])[0]
+
 		for k in range(d):
-			word = words[k]
+			word = words[k] # current word
 			for curr_word, curr_count in curr_counts.iteritems():
-				if word == curr_word and curr_counts >= j:
+				if word == curr_word and curr_counts >= j: # see if current word appears at least j times
 					feature_matrix[i][k] = 1
 
 	return feature_matrix
 
+def create_y_data():
+	"""
+	Loops over files in directory, and gets label vectors from all 202 input xml files.
+	Returns array of length 202 with lebel vectors arrays in each entry
+
+	Returns
+    --------------------
+        label_matrix				-- np matrix of shape (202, 12) of label vectors for each xml file
+	"""
+	label_matrix = np.zeros((202, 12))
+
+	ind = 0
+	for filename in os.listdir("train"):
+		label_matrix[ind] = get_labels_from_xml(os.path.join("train", filename)) # create labels based on file
+		ind+=1
+
+	return label_matrix
+
+def generate_clamp_files():
+	"""
+	Generates the CLAMP files from the text medical records. Make sure to adjust the input and output 
+	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
+	"""
+	path = os.getcwd()
+    path += '/ClampCmd_1.4.0'
+    os.chdir(path)
+    newPath = os.getcwd()
+    os.system('pwd')
+    os.system('./run_ner_pipeline.sh')
+    os.system('./run_attribute_pipeline.sh')
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
+	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
-	text_array = get_all_text()
-	word_counts = get_text_dictionary(text_array)
+	write_labels_to_files(labels_array) # run once to save labels from xml files to disk
+	text_array = get_all_text()[1:]
+	labels_array = get_all_labels()
+	word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
+	plot_stacked_words(text_array, labels_array, word_counts, 10, avg=True)
 	X = create_X_data(text_array, word_counts, 12, 15)
-	print X
 	y = create_y_data()
-	print y
- 	print np.sum(y, axis=0)
-	
+	print distinct_words
+	# generate_clamp_files() run once to get CLAMP files from txt files
 
 
 
