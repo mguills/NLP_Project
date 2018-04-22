@@ -423,6 +423,19 @@ def create_tfidf_data():
 
 	return tfs
 
+def generate_clamp_files():
+	"""
+	Generates the CLAMP files from the text medical records. Make sure to adjust the input and output 
+	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
+	"""
+	path = os.getcwd()
+    path += '/ClampCmd_1.4.0'
+    os.chdir(path)
+    newPath = os.getcwd()
+    os.system('pwd')
+    os.system('./run_ner_pipeline.sh')
+    os.system('./run_attribute_pipeline.sh')
+
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
@@ -439,6 +452,8 @@ def main() :
 	tfs = create_tfidf_data()
 	print tfs
 	print distinct_words	
+	print distinct_words
+	# generate_clamp_files() run once to get CLAMP files from txt files
 
 
 
