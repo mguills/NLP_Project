@@ -92,7 +92,7 @@ def main():
     text_array = pre.get_all_text()
     word_counts, length = pre.get_text_dictionary(text_array)
     
-    X = pre.create_X_data(text_array, word_counts, 12, 15)[:-1]
+    X = pre.create_X_data(text_array, word_counts, 12, 15)
     y = pre.create_y_data()
     print y
 
@@ -102,7 +102,7 @@ def main():
     bestmeans = [0,0,0,0,0,0,0,0,0,0,0,0]
     bestNum = [0,0,0,0,0,0,0,0,0,0,0,0]
     for wordNum in wordNums:
-        X = pre.create_X_data(text_array, word_counts, wordNum, 15)[:-1]
+        X = pre.create_X_data(text_array, word_counts, wordNum, 15)
         y = pre.create_y_data()
 
         test_means, train_means, test_stds, train_stds = get_means(X,y)
