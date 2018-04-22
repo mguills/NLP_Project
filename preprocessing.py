@@ -434,10 +434,43 @@ def generate_clamp_files():
 	path = os.getcwd()
 	path += '/ClampCmd_1.4.0'
 	os.chdir(path)
-	newPath = os.getcwd()
 	os.system('pwd')
 	os.system('./run_ner_pipeline.sh')
 	os.system('./run_attribute_pipeline.sh')
+
+
+def semantic_list():
+	semantic_dict = {}
+	for file in os.listdir("ClampCmd_1.4.0/attribute_output"):
+		semantics = {"drug":[] , "treatment": [], "test": [], "problem": [], "temporal":[],  "BDL": [], "SEV": [] , "labvalue" : [], "COU" : []}
+		if '.txt' in file: #only dealing with the txt files not xmi files 
+			text = open("ClampCmd_1.4.0/attribute_output/" + file).readlines()
+			for line in text:
+				for key in semantics.keys():
+					tag = 'semantic=' + key
+					if tag in line and 'NamedEntity' in line:
+						finalLine = []
+						line = line.split('\t')
+						assertion = ''
+						diagnosis = ''
+						for item in line:
+							if "assertion=" in item:
+								assertion = item[10:].strip()
+							if "ne=" in item:
+								diagnosis = item[3:].strip()
+							if diagnosis != '':
+								if assertion == '':
+									finalLine.append(("N/A", diagnosis))
+								else:
+									finalLine.append ((assertion,diagnosis))
+						semantics[key] += finalLine
+			semantic_dict[str(file)] = semantics
+	return semantic_dict
+
+
+
+
+	
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
@@ -453,8 +486,8 @@ def main() :
 	# X = create_X_data(text_array, word_counts, 12, 15)
 	# y = create_y_data()
 	tfs = create_tfidf_data()
-	print tfs
-	print distinct_words
+	#print tfs
+	#print distinct_words
 	# generate_clamp_files() run once to get CLAMP files from txt files
 
 
