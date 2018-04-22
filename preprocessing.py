@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 # need to download nltk for this to work
 import nltk
 from nltk.tokenize import word_tokenize
+from nltk.corpus import wordnet
+from nltk.stem.wordnet import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
 
@@ -16,20 +19,20 @@ from nltk.corpus import stopwords
 # extracting tokens from xml
 ######################################################################
 
-def get_text_from_xml(filename, stripPunc = True, removeStopwords = True):
+def get_text_from_xml(filename, stripPunc = True, removeStopwords = True, stem = True):
 	"""
 	Takes in a xml file and returns an array of strings representing tokens in 
 	xml file
 
 	Parameters
 	--------------------
-	        filename			-- string, filename
-	        stripPunc			-- boolean flag, string punc from output string
-	        removeStopwords		-- boolean flag, remove stopwords from output string
-    
-    Returns
-    --------------------
-        dom_text				-- array of strings, represents tokens in xml file
+			filename			-- string, filename
+			stripPunc			-- boolean flag, string punc from output string
+			removeStopwords		-- boolean flag, remove stopwords from output string
+	
+	Returns
+	--------------------
+		dom_text				-- array of strings, represents tokens in xml file
 
 	"""
 	dom = parse(filename)
@@ -44,6 +47,10 @@ def get_text_from_xml(filename, stripPunc = True, removeStopwords = True):
 	if removeStopwords:
 		dom_tokens = [word for word in dom_tokens if word not in set(stopwords.words('english'))] # remove stopwords
 
+	if stem:
+		tagged_tokens = nltk.pos_tag(dom_tokens)
+		dom_tokens = [lemmatizer.lemmatize(word[0], get_wordnet_pos(word[1])) for word in tagged_tokens]
+
 	return dom_tokens
 
 def get_all_text_from_xml():
@@ -52,8 +59,8 @@ def get_all_text_from_xml():
 	Returns array of length 202 with arrays of strings in each entry
 
 	Returns
-    	--------------------
-        text_array				-- array of string arrays, represents tokens in all xml files
+		--------------------
+		text_array				-- array of string arrays, represents tokens in all xml files
 	"""
 	text_array = []
 
@@ -68,11 +75,11 @@ def get_labels_from_xml(filename):
 
 	Parameters
 	--------------------
-	        filename			-- string, filename
+			filename			-- string, filename
 
 	Returns
-    	--------------------
-        label_vector			-- np array of 1s and 0s. A 1 represents the tag was met, 0 is not met
+		--------------------
+		label_vector			-- np array of 1s and 0s. A 1 represents the tag was met, 0 is not met
 	"""
 	dom = parse(filename) # parse the xml file
 
@@ -109,11 +116,24 @@ def get_all_text():
 	text_array = []
 
 	for filename in os.listdir("train_text"): # loop through files in text directory
-		file = open(os.path.join("train_text", filename), "r")
-		words = file.read()
-		text_array.append(words.split()) # append words from file to text_array
+		if filename.startswith('filenum'):
+			file = open(os.path.join("train_text", filename), "r")
+			words = file.read()
+			text_array.append(word_tokenize(words)) # append words from file to text_array
 
 	return text_array
+
+def get_text_for_tfidf():
+	"""
+	Gets all text in the form file: text for tfidf form.
+	"""
+	text_dict = {}
+	for filename in os.listdir("train_text"): # loop through files in text directory
+		if filename.startswith('filenum'):
+			file = open(os.path.join("train_text", filename), "r")
+			words = file.read()
+			text_dict[file] = words
+	return text_dict
 
 def write_text_to_files(text_array):
 	"""
@@ -123,7 +143,7 @@ def write_text_to_files(text_array):
 	text_directory = os.path.join(os.getcwd(), r'train_text') 
 
 	if not os.path.exists(text_directory):
-   		os.makedirs(text_directory) # create new train_text directory
+		os.makedirs(text_directory) # create new train_text directory
 
 	for i in range(len(text_array)):
 		filename = os.path.join('train_text', "filenum" + str(i) + '.txt')
@@ -194,12 +214,36 @@ def get_text_dictionary_split(text_array, labels_array, i, avg=False):
 				word_counts_not[word]+=1 # count occurences
 
 	if avg:
-		word_counts_met = {k: v/met_count for k,v in word_counts_met.iteritems()} # get averages for each dict
-		word_counts_not = {k: v/not_count for k,v in word_counts_not.iteritems()}
+		word_counts_met = defaultdict(int, {k: v/met_count for k,v in word_counts_met.iteritems()}) # get averages for each dict
+		word_counts_not = defaultdict(int, {k: v/not_count for k,v in word_counts_not.iteritems()})
 		print met_count
 		print not_count
 
 	return word_counts_met, word_counts_not
+
+def get_word_differences(word_counts_met, word_counts_not):
+	"""
+	Gets differences in word counts
+	"""
+	met_differences = {k: v-word_counts_not[k] for k,v in word_counts_met.iteritems()}
+	not_differences = {k: v-word_counts_met[k] for k,v in word_counts_not.iteritems()}
+
+	return met_differences, not_differences
+
+def get_wordnet_pos(treebank_tag):
+	"""
+	Part of speech mapping used for lemmatization.
+	"""
+	if treebank_tag.startswith('J'):
+		return wordnet.ADJ
+	elif treebank_tag.startswith('V'):
+		return wordnet.VERB
+	elif treebank_tag.startswith('N'):
+		return wordnet.NOUN
+	elif treebank_tag.startswith('R'):
+		return wordnet.ADV
+	else:
+		return wordnet.NOUN
 
 
 ######################################################################
@@ -253,6 +297,8 @@ def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
 
 		met_counts = [word_counts_met[labels[j]] for j in range(k)] # word counts for met
 		not_counts = [word_counts_not[labels[j]] for j in range(k)] # word counts for not met
+		print met_counts
+		print not_counts
 
 		p1 = plt.bar(ind, met_counts, width, color='r') # create splits for bar chart
 		p2 =  plt.bar(ind + width, not_counts, width, color='y') if avg \
@@ -263,7 +309,48 @@ def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
 				else 'Counts of Most Common Words Split on ' + tag_names[i] + ' Met/Not Met'
 		plt.title(title)
 		plt.xticks(ind + (avg*width/2), labels)
-		plt.legend((p1[0], p2[0]), ('Met most common words', 'Not met most common words'))
+		legend_label = ('Met average occurences per file', 'Not met average occurences per file') if avg \
+						else ('Met most common words', 'Not met most common words')
+		plt.legend((p1[0], p2[0]), legend_label)
+
+		plt.show()
+
+def plot_word_differences(text_array, labels_array, k):
+	"""
+	Plots a grouped bar chart of the k words with the biggest differences in 
+	number of appearances in met/not met files. The first k bars give the average counts for 
+	words that appear more often in met files, and the next k bars give the average counts for the
+	k words that appear more often in not met files.
+	"""
+	ind = np.arange(2*k)
+	width = 2.0/k
+
+	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
+				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
+
+	for i in range(12):
+		word_counts_met, word_counts_not = get_text_dictionary_split(text_array, labels_array, i, True) # get word counts for met and not met
+
+		met_differences, not_differences = get_word_differences(word_counts_met, word_counts_not)
+
+		sorted_met = sorted(met_differences.iteritems(), key=lambda (k,v): v, reverse=True)
+		sorted_not = sorted(not_differences.iteritems(), key=lambda (k,v): v, reverse=True)
+
+		met_labels = [sorted_met[j][0] for j in range(k)]
+		not_labels = [sorted_not[j][0] for j in range(k)]
+		labels = met_labels + not_labels
+
+		met_counts = [word_counts_met[labels[j]] for j in range(2*k)]
+		not_counts = [word_counts_not[labels[j]] for j in range(2*k)]
+
+		p1 = plt.bar(ind, met_counts, width, color='r')
+		p2 = plt.bar(ind + width, not_counts, width, color='y')
+
+		plt.ylabel('Counts')
+		plt.title('Counts of biggest difference between ' + tag_names[i] + ' Met/Not Met')
+		plt.xticks(ind + width/2, labels)
+		plt.legend((p1[0], p2[0]), ('Met', 'Not met'))
 
 		plt.show()
 
@@ -280,10 +367,10 @@ def create_X_data(text_array, word_counts, d, j):
 
 	Parameters
 	--------------------
-	        text_array			-- array of string arrays representing words from xml
-	        word_counts			-- dictionary of word counts in xml files
-	        d 					-- number of words to use as features
-	        j 					-- number of words in xml file to get a 1 as a feature
+			text_array			-- array of string arrays representing words from xml
+			word_counts			-- dictionary of word counts in xml files
+			d 					-- number of words to use as features
+			j 					-- number of words in xml file to get a 1 as a feature
 
 	Returns
 	--------------------
@@ -313,8 +400,8 @@ def create_y_data():
 	Returns array of length 202 with lebel vectors arrays in each entry
 
 	Returns
-    --------------------
-        label_matrix				-- np matrix of shape (202, 12) of label vectors for each xml file
+	--------------------
+		label_matrix				-- np matrix of shape (202, 12) of label vectors for each xml file
 	"""
 	label_matrix = np.zeros((202, 12))
 
@@ -325,21 +412,35 @@ def create_y_data():
 
 	return label_matrix
 
+def create_tfidf_data():
+	"""
+	Creates a 202x28503 matrix. Each entry (i,j) gives the tfidf of word j in 
+	file number i. 
+	"""
+	text_dict = get_text_for_tfidf()
+	tfidf = TfidfVectorizer(max_features=15)
+	tfs = tfidf.fit_transform(text_dict.values())
+
+	return tfs
+
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
-	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
+	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
-	write_labels_to_files(labels_array) # run once to save labels from xml files to disk
-	text_array = get_all_text()[1:]
+	# write_labels_to_files(labels_array) # run once to save labels from xml files to disk
+	text_array = get_all_text()
 	labels_array = get_all_labels()
 	word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
-	plot_stacked_words(text_array, labels_array, word_counts, 10, avg=True)
+	plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
+	plot_word_differences(text_array, labels_array, 6)
 	X = create_X_data(text_array, word_counts, 12, 15)
 	y = create_y_data()
+	tfs = create_tfidf_data()
+	print tfs
 	print distinct_words	
 
 
 
 if __name__ == "__main__" :
-    main()
+	main()
