@@ -1,0 +1,1152 @@
+NamedEntity	183	234	semantic=problem	assertion=present	ne=medical problems problems 1 coronary artery disease
+NamedEntity	211	226	semantic=BDL	ne=coronary artery
+NamedEntity	247	269	semantic=treatment	assertion=present	cui=C0010055	ne=coronary artery bypass
+NamedEntity	292	309	semantic=problem	assertion=present	ne=pulmonary embolus
+NamedEntity	292	301	semantic=BDL	ne=pulmonary
+NamedEntity	317	340	semantic=problem	assertion=present	ne=idiopathic hypertension
+NamedEntity	399	407	semantic=NEG	ne=negative
+NamedEntity	408	472	semantic=problem	assertion=present	ne=chest pain shortness breath cough peripheral edema orthopnea pnd
+NamedEntity	408	413	semantic=BDL	ne=chest
+NamedEntity	502	513	semantic=treatment	assertion=present	cui=C0013227	ne=medications
+NamedEntity	524	534	semantic=drug	cui=C0987217, RxNorm=[316151], Generic=[29046]	ne=lisinopril
+NamedEntity	535	540	semantic=drug::STRENGTH	ne=10 mg
+NamedEntity	541	543	semantic=drug::FREQ	ne=qd
+NamedEntity	544	563	semantic=drug	cui=C0986526, RxNorm=[316049], Generic=[5487]	ne=hydrochlorothiazide
+NamedEntity	564	569	semantic=drug::STRENGTH	ne=25 mg
+NamedEntity	570	572	semantic=drug::FREQ	ne=qd
+NamedEntity	573	581	semantic=drug	cui=C0983889, RxNorm=[315438], Generic=[1202]	ne=atenolol
+NamedEntity	582	587	semantic=drug::STRENGTH	ne=50 mg
+NamedEntity	588	590	semantic=drug::FREQ	ne=qd
+NamedEntity	591	597	semantic=drug	cui=C1607286, RxNorm=[573094], Generic=[174742]	ne=plavix
+NamedEntity	598	603	semantic=drug::STRENGTH	ne=75 mg
+NamedEntity	604	606	semantic=drug::FREQ	ne=qd
+NamedEntity	629	634	semantic=temporal	ne=today
+NamedEntity	665	671	semantic=test	assertion=present	cui=C2989186	ne=feisty
+NamedEntity	710	716	semantic=test	assertion=present	cui=C0043100	ne=weight
+NamedEntity	717	727	semantic=labvalue	ne=175 pounds
+NamedEntity	735	745	semantic=test	assertion=present	cui=C0232117	ne=pulse rate
+NamedEntity	746	748	semantic=labvalue	ne=80
+NamedEntity	772	779	semantic=NEG	ne=without
+NamedEntity	780	948	semantic=problem	assertion=absent	ne=murmur gallop rub click breath sounds clear percussion auscultation jugular venous distension peripheral edema assessment 1 new york heart association functional classi
+NamedEntity	913	918	semantic=BDL	ne=heart
+NamedEntity	966	970	semantic=treatment	assertion=absent	cui=C0010055	ne=cabg
+NamedEntity	1016	1023	semantic=treatment	assertion=present	cui=C0040808	ne=regimen
+NamedEntity	1038	1045	semantic=drug	cui=C0593906, RxNorm=[153165], Generic=[153165]	ne=lipitor
+NamedEntity	1071	1091	semantic=problem	assertion=present	ne=hypercholesterolemia
+NamedEntity	1099	1110	semantic=test	assertion=present	cui=C0008377	ne=cholesterol
+NamedEntity	1111	1118	semantic=labvalue	ne=263 103
+NamedEntity	1128	1135	semantic=drug	cui=C0593906, RxNorm=[153165], Generic=[153165]	ne=lipitor
+NamedEntity	1171	1178	semantic=drug	cui=RxNorm=[997622], Generic=[997622]	ne=sojourn
+NamedEntity	1278	1286	semantic=labvalue	ne=20780510
+NamedEntity	1287	1298	semantic=test	assertion=present	cui=C0518766	ne=vital signs
+NamedEntity	1299	1301	semantic=test	assertion=present	cui=C0005824	ne=bp
+NamedEntity	1308	1309	semantic=test	assertion=present	cui=C0202178	ne=p
+NamedEntity	1310	1312	semantic=labvalue	ne=68
+NamedEntity	1313	1315	semantic=test	assertion=present	cui=C2700323	ne=wt
+NamedEntity	1316	1325	semantic=labvalue	ne=172 lb 69
+NamedEntity	1375	1396	semantic=problem	assertion=present	ne=diabetes hypertension
+NamedEntity	1402	1427	semantic=temporal	ne=several weeks ago 4 month
+NamedEntity	1402	1415	semantic=drug::DRT	ne=several weeks
+NamedEntity	1446	1456	semantic=test	assertion=present	cui=C0010294	ne=creatinine
+NamedEntity	1470	1472	semantic=test	assertion=present	cui=C0005824	ne=bp
+NamedEntity	1533	1539	semantic=NEG	ne=denies
+NamedEntity	1533	1539	semantic=NEG	ne=denies
+NamedEntity	1533	1539	semantic=NEG	ne=denies
+NamedEntity	1540	1607	semantic=problem	assertion=absent	ne=chest pain shortness breath pnd orthopnea change exercise tolerance
+NamedEntity	1540	1545	semantic=BDL	ne=chest
+NamedEntity	1615	1626	semantic=treatment	assertion=absent	cui=C0013227	ne=medications
+NamedEntity	1746	1752	semantic=temporal	ne=1 year
+NamedEntity	1805	1813	semantic=temporal	ne=ms3s4 hr
+NamedEntity	1817	1837	semantic=problem	assertion=absent	ne=reg peripheral edema
+NamedEntity	1838	1844	semantic=test	assertion=absent	ne=hgba1c
+NamedEntity	1845	1847	semantic=labvalue	ne=65
+NamedEntity	1866	1876	semantic=test	assertion=absent	cui=C0010294	ne=creatinine
+NamedEntity	1884	1886	semantic=labvalue	ne=14
+NamedEntity	1968	1988	semantic=problem	assertion=absent	ne=diabetic history cad
+NamedEntity	1997	2008	semantic=treatment	assertion=absent	cui=C3840096	ne=bradycardic
+NamedEntity	2009	2017	semantic=drug	cui=C0004147, RxNorm=[1202], Generic=[1202]	ne=atenolol
+NamedEntity	2018	2023	semantic=drug::STRENGTH	ne=50 mg
+NamedEntity	2024	2026	semantic=drug::FREQ	ne=qd
+NamedEntity	2049	2056	semantic=treatment	assertion=present	cui=C0040808	ne=regimen
+NamedEntity	2067	2077	semantic=drug	cui=C0065374, RxNorm=[29046], Generic=[29046]	ne=lisinopril
+NamedEntity	2418	2448	semantic=problem	assertion=present	ne=diabetes mellitus hypertension
+NamedEntity	2454	2472	semantic=problem	assertion=present	ne=episode bronchitis
+NamedEntity	2473	2481	semantic=temporal	ne=2 months
+NamedEntity	2494	2505	semantic=treatment	assertion=present	cui=C0003232	ne=antibiotics
+NamedEntity	2529	2534	semantic=temporal	ne=today
+NamedEntity	2569	2598	semantic=problem	assertion=present	ne=acute distress blood pressure
+NamedEntity	2569	2574	semantic=SEV	ne=acute
+NamedEntity	2584	2589	semantic=BDL	ne=blood
+NamedEntity	2605	2610	semantic=test	assertion=present	cui=C0034107	ne=pulse
+NamedEntity	2611	2613	semantic=labvalue	ne=64
+NamedEntity	2679	2687	semantic=NEG	ne=negative
+NamedEntity	2688	2769	semantic=problem	assertion=present	ne=s3 s4 murmur abdomen soft nontender positive bowel sounds lower extremities edema
+NamedEntity	2701	2708	semantic=BDL	ne=abdomen
+NamedEntity	2733	2738	semantic=BDL	ne=bowel
+NamedEntity	2746	2763	semantic=BDL	ne=lower extremities
+NamedEntity	2798	2815	semantic=problem	assertion=present	ne=diabetes mellitus
+NamedEntity	2832	2844	semantic=test	assertion=present	cui=C0005802	ne=blood sugars
+NamedEntity	2888	2905	semantic=problem	assertion=present	ne=diabetes mellitus
+NamedEntity	2915	2932	semantic=treatment	assertion=present	cui=C2827774	ne=current treatment
+NamedEntity	2961	2975	semantic=test	assertion=present	cui=C0019018	ne=hemoglobin a1c
+NamedEntity	2995	3009	semantic=test	assertion=present	cui=C0019018	ne=hemoglobin a1c
+NamedEntity	3031	3043	semantic=problem	assertion=present	ne=hypertension
+NamedEntity	3053	3061	semantic=drug	cui=C0983889, RxNorm=[315438], Generic=[1202]	ne=atenolol
+NamedEntity	3071	3080	semantic=COU	ne=decreased
+NamedEntity	3071	3080	semantic=COU	ne=decreased
+NamedEntity	3071	3080	semantic=COU	ne=decreased
+NamedEntity	3071	3080	semantic=COU	ne=decreased
+NamedEntity	3081	3086	semantic=drug::STRENGTH	ne=50 mg
+NamedEntity	3093	3104	semantic=problem	assertion=present	ne=bradycardia
+NamedEntity	3105	3115	semantic=drug	cui=C0065374, RxNorm=[29046], Generic=[29046]	ne=lisinopril
+NamedEntity	3126	3131	semantic=drug::STRENGTH	ne=60 mg
+NamedEntity	3158	3168	semantic=test	assertion=present	cui=C0018810	ne=heart rate
+NamedEntity	3181	3183	semantic=labvalue	ne=64
+NamedEntity	3196	3210	semantic=test	assertion=present	cui=C0005823	ne=blood pressure
+NamedEntity	3219	3244	semantic=problem	assertion=present	ne=borderline elevated check
+NamedEntity	3245	3257	semantic=test	assertion=present	cui=C2362049	ne=microalbumin
+NamedEntity	3258	3265	semantic=temporal	ne=today 4
+NamedEntity	3266	3301	semantic=problem	assertion=present	ne=recent tsh mildly suppressed repeat
+NamedEntity	3302	3307	semantic=temporal	ne=today
+NamedEntity	3318	3340	semantic=test	assertion=present	cui=C0262500	ne=healthcare maintenance
+NamedEntity	3556	3564	semantic=temporal	ne=08012082
+NamedEntity	3596	3607	semantic=treatment	assertion=present	cui=C0150177	ne=vision care
+NamedEntity	3690	3717	semantic=problem	assertion=present	ne=decompensated heart failure
+NamedEntity	3704	3709	semantic=BDL	ne=heart
+NamedEntity	3727	3745	semantic=temporal	ne=07232082 one month
+NamedEntity	3736	3745	semantic=drug::DRT	ne=one month
+NamedEntity	3765	3779	semantic=problem	assertion=present	ne=abdominal pain
+NamedEntity	3765	3774	semantic=BDL	ne=abdominal
+NamedEntity	3818	3829	semantic=problem	assertion=present	ne=gi symptoms
+NamedEntity	3830	3843	semantic=problem	assertion=present	ne=heart failure
+NamedEntity	3830	3835	semantic=BDL	ne=heart
+NamedEntity	3861	3964	semantic=problem	assertion=present	ne=continued gi discomfort orthopnea lower extremity edema 9 pounds weight gain increasing abdominal girth
+NamedEntity	3895	3910	semantic=BDL	ne=lower extremity
+NamedEntity	3938	3948	semantic=COU	ne=increasing
+NamedEntity	3949	3958	semantic=BDL	ne=abdominal
+NamedEntity	4014	4028	semantic=drug	cui=C0003015, RxNorm=[836], Generic=[836]	ne=ace inhibitors
+NamedEntity	4029	4041	semantic=problem	assertion=present	ne=hypertension
+NamedEntity	4042	4051	semantic=drug	cui=C0012798, RxNorm=[3567], Generic=[3567]	ne=diuretics
+NamedEntity	4111	4134	semantic=test	assertion=present	cui=C0428897	ne=jugular venous pressure
+NamedEntity	4160	4174	semantic=test	assertion=present	cui=C0013516	ne=echocardiogram
+NamedEntity	4182	4199	semantic=test	assertion=present	cui=C2700378	ne=ejection fraction
+NamedEntity	4233	4333	semantic=problem	assertion=present	ne=enlarged right ventricle mild decrease rv function severe rv pressure overload estimated pa pressure
+NamedEntity	4242	4257	semantic=BDL	ne=right ventricle
+NamedEntity	4258	4262	semantic=SEV	ne=mild
+NamedEntity	4263	4271	semantic=COU	ne=decrease
+NamedEntity	4284	4290	semantic=SEV	ne=severe
+NamedEntity	4291	4293	semantic=BDL	ne=rv
+NamedEntity	4342	4363	semantic=treatment	assertion=present	cui=C0456165	ne=right atrial pressure
+NamedEntity	4383	4410	semantic=test	assertion=present	cui=C0189896	ne=right heart catheterization
+NamedEntity	4420	4441	semantic=test	assertion=present	cui=C0456165	ne=right atrial pressure
+NamedEntity	4444	4478	semantic=test	assertion=present	cui=C0086879	ne=pulmonary capillary wedge pressure
+NamedEntity	4479	4481	semantic=labvalue	ne=18
+NamedEntity	4482	4493	semantic=test	assertion=present	cui=C0428642	ne=pa pressure
+NamedEntity	4494	4498	semantic=labvalue	ne=6535
+NamedEntity	4509	4545	semantic=treatment	assertion=present	cui=C0282462	ne=trial iv nitroglycerin sildenafil iv
+NamedEntity	4515	4517	semantic=drug::RUT	ne=iv
+NamedEntity	4518	4531	semantic=drug	cui=C0017887, RxNorm=[4917], Generic=[4917]	ne=nitroglycerin
+NamedEntity	4532	4542	semantic=drug	cui=C0529793, RxNorm=[136411], Generic=[136411]	ne=sildenafil
+NamedEntity	4543	4545	semantic=drug::RUT	ne=iv
+NamedEntity	4546	4559	semantic=drug	cui=C0017887, RxNorm=[4917], Generic=[4917]	ne=nitroglycerin
+NamedEntity	4560	4585	semantic=problem	assertion=present	ne=decreased blank pressures
+NamedEntity	4560	4569	semantic=COU	ne=decreased
+NamedEntity	4613	4632	semantic=problem	assertion=present	ne=improvement dyspnea
+NamedEntity	4613	4624	semantic=COU	ne=improvement
+NamedEntity	4639	4650	semantic=COU	ne=improvement
+NamedEntity	4651	4661	semantic=drug	cui=C3213483, RxNorm=[1159091], Generic=[136411]	ne=sildenafil
+NamedEntity	4691	4705	semantic=test	assertion=present	cui=C0007165	ne=cardiac output
+NamedEntity	4719	4730	semantic=treatment	assertion=present	cui=C0013227	ne=medications
+NamedEntity	4744	4748	semantic=drug::RUT	ne=oral
+NamedEntity	4749	4762	semantic=drug	cui=C0017887, RxNorm=[4917], Generic=[4917]	ne=nitroglycerin
+NamedEntity	4781	4806	semantic=treatment	assertion=present	cui=C3266215	ne=heart failure medications
+NamedEntity	4822	4826	semantic=treatment	assertion=present	cui=C0162680	ne=mibi
+NamedEntity	4844	4859	semantic=problem	assertion=present	ne=active ischemia
+NamedEntity	4895	4902	semantic=NEG	ne=without
+NamedEntity	4903	4927	semantic=problem	assertion=absent	ne=postural change symptoms
+NamedEntity	4928	4939	semantic=treatment	assertion=absent	cui=C0013227	ne=medications
+NamedEntity	4940	4947	semantic=drug	cui=C1606171, RxNorm=[571973], Generic=[151187]	ne=isordil
+NamedEntity	4948	4950	semantic=drug::STRENGTH	ne=10
+NamedEntity	4951	4954	semantic=drug::FREQ	ne=tid
+NamedEntity	4955	4960	semantic=drug	cui=C1597894, RxNorm=[565458], Generic=[202991]	ne=lasix
+NamedEntity	4961	4966	semantic=drug::STRENGTH	ne=40 mg
+NamedEntity	4967	4969	semantic=drug::RUT	ne=po
+NamedEntity	4970	4973	semantic=drug::FREQ	ne=bid
+NamedEntity	4974	4982	semantic=treatment	assertion=absent	cui=C0708586	ne=toprolxl
+NamedEntity	4993	5003	semantic=drug	cui=C0987221, RxNorm=[316155], Generic=[29046]	ne=lisinopril
+NamedEntity	5014	5019	semantic=drug::STRENGTH	ne=40 mg
+NamedEntity	5035	5046	semantic=problem	assertion=absent	ne=hypotension
+NamedEntity	5125	5131	semantic=drug	cui=C1607286, RxNorm=[573094], Generic=[174742]	ne=plavix
+NamedEntity	5132	5137	semantic=drug::STRENGTH	ne=75 mg
+NamedEntity	5138	5143	semantic=drug::FREQ	ne=daily
+NamedEntity	5149	5160	semantic=drug	cui=C0074554, RxNorm=[36567], Generic=[36567]	ne=simvastatin
+NamedEntity	5174	5188	semantic=test	assertion=present	cui=C0005823	ne=blood pressure
+NamedEntity	5189	5194	semantic=labvalue	ne=10260
+NamedEntity	5195	5218	semantic=test	assertion=present	cui=C0428897	ne=jugular venous pressure
+NamedEntity	5219	5224	semantic=labvalue	ne=89 cm
+NamedEntity	5225	5235	semantic=test	assertion=present	cui=C0010294	ne=creatinine
+NamedEntity	5236	5238	semantic=labvalue	ne=13
+NamedEntity	5239	5242	semantic=test	assertion=present	cui=C0005845	ne=bun
+NamedEntity	5243	5245	semantic=labvalue	ne=44
+NamedEntity	5246	5256	semantic=test	assertion=present	cui=C0018935	ne=hematocrit
+NamedEntity	5257	5259	semantic=labvalue	ne=40
+NamedEntity	5260	5277	semantic=test	assertion=present	cui=C0023508	ne=white blood count
+NamedEntity	5278	5282	semantic=labvalue	ne=5000
+NamedEntity	5400	5416	semantic=treatment	assertion=present	cui=C0012169	ne=salt restriction
+NamedEntity	5422	5439	semantic=treatment	assertion=present	cui=C0204700	ne=fluid restriction
+NamedEntity	5440	5452	semantic=temporal	ne=2 liters day
+NamedEntity	5440	5448	semantic=drug::STRENGTH	ne=2 liters
+NamedEntity	5492	5497	semantic=drug::FREQ	ne=daily
+Relation	629	634	temporal	502	513	treatment	semantic=timeof
+Relation	541	543	temporal	524	534	treatment	semantic=timeof
+Relation	629	634	temporal	524	534	treatment	semantic=timeof
+Relation	541	543	temporal	544	563	treatment	semantic=timeof
+Relation	570	572	temporal	544	563	treatment	semantic=timeof
+Relation	570	572	temporal	573	581	treatment	semantic=timeof
+Relation	588	590	temporal	573	581	treatment	semantic=timeof
+Relation	588	590	temporal	591	597	treatment	semantic=timeof
+Relation	604	606	temporal	591	597	treatment	semantic=timeof
+Relation	629	634	temporal	591	597	treatment	semantic=timeof
+Relation	629	634	temporal	665	671	test	semantic=timeof
+Relation	629	634	temporal	710	716	test	semantic=timeof
+Relation	629	634	temporal	735	745	test	semantic=timeof
+Relation	1402	1427	temporal	1128	1135	treatment	semantic=timeof
+Relation	1402	1427	temporal	1308	1309	test	semantic=timeof
+Relation	1402	1427	temporal	1313	1315	test	semantic=timeof
+Relation	1402	1427	temporal	1375	1396	problem	semantic=timeof
+Relation	1402	1427	temporal	1446	1456	test	semantic=timeof
+Relation	1402	1427	temporal	1470	1472	test	semantic=timeof
+Relation	1746	1752	temporal	1615	1626	treatment	semantic=timeof
+Relation	1805	1813	temporal	1615	1626	treatment	semantic=timeof
+Relation	1746	1752	temporal	1817	1837	problem	semantic=timeof
+Relation	1805	1813	temporal	1817	1837	problem	semantic=timeof
+Relation	1746	1752	temporal	1838	1844	test	semantic=timeof
+Relation	1805	1813	temporal	1838	1844	test	semantic=timeof
+Relation	1746	1752	temporal	1997	2008	treatment	semantic=timeof
+Relation	2473	2481	temporal	2418	2448	problem	semantic=timeof
+Relation	2473	2481	temporal	2454	2472	problem	semantic=timeof
+Relation	2473	2481	temporal	2494	2505	treatment	semantic=timeof
+Relation	2529	2534	temporal	2569	2598	problem	semantic=timeof
+Relation	2529	2534	temporal	2605	2610	test	semantic=timeof
+Relation	3258	3265	temporal	3031	3043	problem	semantic=timeof
+Relation	3258	3265	temporal	3053	3061	treatment	semantic=timeof
+Relation	3302	3307	temporal	3053	3061	treatment	semantic=timeof
+Relation	3258	3265	temporal	3196	3210	test	semantic=timeof
+Relation	3258	3265	temporal	3219	3244	problem	semantic=timeof
+Relation	3302	3307	temporal	3219	3244	problem	semantic=timeof
+Relation	3258	3265	temporal	3245	3257	test	semantic=timeof
+Relation	3302	3307	temporal	3245	3257	test	semantic=timeof
+Relation	3258	3265	temporal	3266	3301	problem	semantic=timeof
+Relation	3302	3307	temporal	3266	3301	problem	semantic=timeof
+Relation	3258	3265	temporal	3318	3340	test	semantic=timeof
+Relation	3302	3307	temporal	3318	3340	test	semantic=timeof
+Relation	3556	3564	temporal	3596	3607	treatment	semantic=timeof
+Relation	3727	3745	temporal	3596	3607	treatment	semantic=timeof
+Relation	3727	3745	temporal	3690	3717	problem	semantic=timeof
+Relation	3727	3745	temporal	3765	3779	problem	semantic=timeof
+Relation	3727	3745	temporal	3818	3829	problem	semantic=timeof
+Relation	3727	3745	temporal	3830	3843	problem	semantic=timeof
+Relation	4951	4954	temporal	4940	4947	treatment	semantic=timeof
+Relation	4951	4954	temporal	4955	4960	treatment	semantic=timeof
+Relation	5138	5143	temporal	5125	5131	treatment	semantic=timeof
+Relation	5440	5452	temporal	5400	5416	treatment	semantic=timeof
+Relation	5440	5452	temporal	5422	5439	treatment	semantic=timeof
+Relation	183	234	problem	211	226	BDL	semantic=BDL_Of
+Relation	292	309	problem	292	301	BDL	semantic=BDL_Of
+Relation	408	472	problem	399	407	NEG	semantic=NEG_Of
+Relation	408	472	problem	408	413	BDL	semantic=BDL_Of
+Relation	780	948	problem	772	779	NEG	semantic=NEG_Of
+Relation	780	948	problem	913	918	BDL	semantic=BDL_Of
+Relation	1540	1607	problem	1533	1539	NEG	semantic=NEG_Of
+Relation	1540	1607	problem	1540	1545	BDL	semantic=BDL_Of
+Relation	1817	1837	problem	1533	1539	NEG	semantic=NEG_Of
+Relation	1968	1988	problem	1533	1539	NEG	semantic=NEG_Of
+Relation	2569	2598	problem	2569	2574	SEV	semantic=SEV_Of
+Relation	2569	2598	problem	2584	2589	BDL	semantic=BDL_Of
+Relation	2688	2769	problem	2679	2687	NEG	semantic=NEG_Of
+Relation	2688	2769	problem	2701	2708	BDL	semantic=BDL_Of
+Relation	2688	2769	problem	2733	2738	BDL	semantic=BDL_Of
+Relation	2688	2769	problem	2746	2763	BDL	semantic=BDL_Of
+Relation	3031	3043	problem	3071	3080	COU	semantic=COU_Of
+Relation	3093	3104	problem	3071	3080	COU	semantic=COU_Of
+Relation	3219	3244	problem	3071	3080	COU	semantic=COU_Of
+Relation	3266	3301	problem	3071	3080	COU	semantic=COU_Of
+Relation	3690	3717	problem	3704	3709	BDL	semantic=BDL_Of
+Relation	3765	3779	problem	3765	3774	BDL	semantic=BDL_Of
+Relation	3830	3843	problem	3830	3835	BDL	semantic=BDL_Of
+Relation	3861	3964	problem	3938	3948	COU	semantic=COU_Of
+Relation	3861	3964	problem	3949	3958	BDL	semantic=BDL_Of
+Relation	3861	3964	problem	3895	3910	BDL	semantic=BDL_Of
+Relation	4233	4333	problem	4263	4271	COU	semantic=COU_Of
+Relation	4233	4333	problem	4258	4262	SEV	semantic=SEV_Of
+Relation	4233	4333	problem	4284	4290	SEV	semantic=SEV_Of
+Relation	4233	4333	problem	4242	4257	BDL	semantic=BDL_Of
+Relation	4233	4333	problem	4291	4293	BDL	semantic=BDL_Of
+Relation	4560	4585	problem	4560	4569	COU	semantic=COU_Of
+Relation	4613	4632	problem	4613	4624	COU	semantic=COU_Of
+Relation	4613	4632	problem	4639	4650	COU	semantic=COU_Of
+Relation	4903	4927	problem	4895	4902	NEG	semantic=NEG_Of
+Relation	591	597	drug	604	606	drug::FREQ	semantic=attrOf
+Relation	591	597	drug	598	603	drug::STRENGTH	semantic=attrOf
+Relation	573	581	drug	588	590	drug::FREQ	semantic=attrOf
+Relation	573	581	drug	582	587	drug::STRENGTH	semantic=attrOf
+Relation	544	563	drug	570	572	drug::FREQ	semantic=attrOf
+Relation	544	563	drug	564	569	drug::STRENGTH	semantic=attrOf
+Relation	524	534	drug	541	543	drug::FREQ	semantic=attrOf
+Relation	524	534	drug	535	540	drug::STRENGTH	semantic=attrOf
+Relation	1171	1178	drug	1402	1415	drug::DRT	semantic=attrOf
+Relation	2067	2077	drug	2018	2023	drug::STRENGTH	semantic=attrOf
+Relation	2067	2077	drug	2024	2026	drug::FREQ	semantic=attrOf
+Relation	3105	3115	drug	3126	3131	drug::STRENGTH	semantic=attrOf
+Relation	3053	3061	drug	3081	3086	drug::STRENGTH	semantic=attrOf
+Relation	4014	4028	drug	3736	3745	drug::DRT	semantic=attrOf
+Relation	4532	4542	drug	4543	4545	drug::RUT	semantic=attrOf
+Relation	4042	4051	drug	4515	4517	drug::RUT	semantic=attrOf
+Relation	4993	5003	drug	5014	5019	drug::STRENGTH	semantic=attrOf
+Relation	4955	4960	drug	4961	4966	drug::STRENGTH	semantic=attrOf
+Relation	4955	4960	drug	4967	4969	drug::RUT	semantic=attrOf
+Relation	4955	4960	drug	4970	4973	drug::FREQ	semantic=attrOf
+Relation	4940	4947	drug	4951	4954	drug::FREQ	semantic=attrOf
+Relation	4940	4947	drug	4948	4950	drug::STRENGTH	semantic=attrOf
+Relation	4651	4661	drug	4744	4748	drug::RUT	semantic=attrOf
+Relation	5149	5160	drug	5492	5497	drug::FREQ	semantic=attrOf
+Relation	5149	5160	drug	5440	5448	drug::STRENGTH	semantic=attrOf
+Relation	5125	5131	drug	5138	5143	drug::FREQ	semantic=attrOf
+Relation	5125	5131	drug	5132	5137	drug::STRENGTH	semantic=attrOf
+Relation	1111	1118	labvalue	1099	1110	test	semantic=valueOf
+Relation	5236	5238	labvalue	5225	5235	test	semantic=valueOf
+Relation	717	727	labvalue	710	716	test	semantic=valueOf
+Relation	1310	1312	labvalue	1308	1309	test	semantic=valueOf
+Relation	1316	1325	labvalue	1313	1315	test	semantic=valueOf
+Relation	5189	5194	labvalue	5174	5188	test	semantic=valueOf
+Relation	746	748	labvalue	735	745	test	semantic=valueOf
+Relation	1845	1847	labvalue	1838	1844	test	semantic=valueOf
+Relation	5243	5245	labvalue	5239	5242	test	semantic=valueOf
+Relation	5219	5224	labvalue	5195	5218	test	semantic=valueOf
+Relation	2611	2613	labvalue	2605	2610	test	semantic=valueOf
+Relation	5278	5282	labvalue	5260	5277	test	semantic=valueOf
+Relation	4494	4498	labvalue	4482	4493	test	semantic=valueOf
+Relation	1278	1286	labvalue	1287	1298	test	semantic=valueOf
+Relation	5257	5259	labvalue	5246	5256	test	semantic=valueOf
+Relation	3181	3183	labvalue	3158	3168	test	semantic=valueOf
+Relation	1884	1886	labvalue	1866	1876	test	semantic=valueOf
+Relation	4479	4481	labvalue	4444	4478	test	semantic=valueOf
+Sentence	0	501	section=NONEHEADER
+Sentence	502	1005	section=medications
+Sentence	1006	1511	section=medications
+Sentence	1512	2017	section=medications
+Sentence	2018	2519	section=medications
+Sentence	2520	3022	section=medications
+Sentence	3023	3529	section=medications
+Sentence	3530	4041	section=medications
+Sentence	4042	4545	section=medications
+Sentence	4546	5052	section=medications
+Sentence	5053	5559	section=medications
+Sentence	5560	5800	section=medications
+Token	0	9	pos=NN
+Token	10	16	pos=NN
+Token	17	21	pos=NN
+Token	22	30	pos=CD
+Token	31	37	pos=NN
+Token	38	45	pos=JJ
+Token	46	52	pos=NN
+Token	53	65	pos=NN
+Token	66	72	pos=RB
+Token	73	79	pos=JJ
+Token	80	84	pos=CD
+Token	85	94	pos=NNS
+Token	95	99	pos=JJ
+Token	100	108	pos=JJ
+Token	109	111	pos=JJ
+Token	112	117	pos=NN
+Token	118	125	pos=NN
+Token	126	134	pos=NN
+Token	135	143	pos=IN
+Token	144	150	pos=DT
+Token	151	158	pos=NN
+Token	159	163	pos=VBN
+Token	164	172	pos=NN
+Token	173	182	pos=VBG
+Token	183	190	pos=JJ
+Token	191	199	pos=NNS
+Token	200	208	pos=NNS
+Token	209	210	pos=LS
+Token	211	219	pos=JJ
+Token	220	226	pos=NN
+Token	227	234	pos=NN
+Token	235	241	pos=NN
+Token	242	246	pos=IN
+Token	247	255	pos=JJ
+Token	256	262	pos=NN
+Token	263	269	pos=NN
+Token	270	279	pos=JJ
+Token	280	284	pos=NN
+Token	285	289	pos=IN
+Token	290	291	pos=CD
+Token	292	301	pos=JJ
+Token	302	309	pos=NN
+Token	310	314	pos=CD
+Token	315	316	pos=CD
+Token	317	327	pos=JJ
+Token	328	340	pos=NN
+Token	341	351	pos=JJ
+Token	352	360	pos=NN
+Token	361	373	pos=JJ
+Token	374	383	pos=NN
+Token	384	390	pos=NN
+Token	391	398	pos=NNS
+Token	399	407	pos=JJ
+Token	408	413	pos=NN
+Token	414	418	pos=NN
+Token	419	428	pos=NN
+Token	429	435	pos=NN
+Token	436	441	pos=NN
+Token	442	452	pos=JJ
+Token	453	458	pos=NN
+Token	459	468	pos=NN
+Token	469	472	pos=NN
+Token	473	479	pos=NN
+Token	480	487	pos=NNS
+Token	488	496	pos=JJ
+Token	497	501	pos=RB
+Token	502	513	pos=NNS
+Token	514	523	pos=NNS
+Token	524	534	pos=NN
+Token	535	537	pos=CD
+Token	538	540	pos=NNS
+Token	541	543	pos=FW
+Token	544	563	pos=NN
+Token	564	566	pos=CD
+Token	567	569	pos=NNS
+Token	570	572	pos=FW
+Token	573	581	pos=NNP
+Token	582	584	pos=CD
+Token	585	587	pos=NNS
+Token	588	590	pos=FW
+Token	591	597	pos=NN
+Token	598	600	pos=CD
+Token	601	603	pos=NNS
+Token	604	606	pos=FW
+Token	607	616	pos=JJ
+Token	617	628	pos=NN
+Token	629	634	pos=NN
+Token	635	642	pos=NN
+Token	643	650	pos=VBZ
+Token	651	655	pos=RB
+Token	656	664	pos=JJ
+Token	665	671	pos=NN
+Token	672	677	pos=NN
+Token	678	686	pos=NN
+Token	687	692	pos=CD
+Token	693	697	pos=JJ
+Token	698	701	pos=NN
+Token	702	709	pos=NN
+Token	710	716	pos=NN
+Token	717	720	pos=CD
+Token	721	727	pos=NNS
+Token	728	734	pos=JJ
+Token	735	740	pos=NN
+Token	741	745	pos=NN
+Token	746	748	pos=CD
+Token	749	756	pos=NN
+Token	757	763	pos=NN
+Token	764	771	pos=JJ
+Token	772	779	pos=IN
+Token	780	786	pos=NN
+Token	787	793	pos=NN
+Token	794	797	pos=NN
+Token	798	803	pos=NN
+Token	804	810	pos=NN
+Token	811	817	pos=NNS
+Token	818	823	pos=JJ
+Token	824	834	pos=NN
+Token	835	847	pos=NN
+Token	848	855	pos=JJ
+Token	856	862	pos=JJ
+Token	863	873	pos=NN
+Token	874	884	pos=JJ
+Token	885	890	pos=NN
+Token	891	901	pos=NN
+Token	902	903	pos=CD
+Token	904	907	pos=JJ
+Token	908	912	pos=NN
+Token	913	918	pos=NN
+Token	919	930	pos=NN
+Token	931	941	pos=JJ
+Token	942	948	pos=NN
+Token	949	953	pos=CC
+Token	954	960	pos=NN
+Token	961	965	pos=IN
+Token	966	970	pos=NN
+Token	971	972	pos=CD
+Token	973	987	pos=JJ
+Token	988	1000	pos=NN
+Token	1001	1005	pos=NN
+Token	1006	1007	pos=LS
+Token	1008	1015	pos=JJ
+Token	1016	1023	pos=NN
+Token	1024	1025	pos=CD
+Token	1026	1032	pos=NN
+Token	1033	1037	pos=NN
+Token	1038	1045	pos=NN
+Token	1046	1051	pos=VBN
+Token	1052	1059	pos=NN
+Token	1060	1064	pos=JJ
+Token	1065	1070	pos=NN
+Token	1071	1091	pos=NN
+Token	1092	1098	pos=NN
+Token	1099	1110	pos=NN
+Token	1111	1114	pos=CD
+Token	1115	1118	pos=CD
+Token	1119	1127	pos=VB
+Token	1128	1135	pos=NN
+Token	1136	1140	pos=RB
+Token	1141	1142	pos=CD
+Token	1143	1149	pos=NN
+Token	1150	1155	pos=JJ
+Token	1156	1163	pos=JJ
+Token	1164	1170	pos=NN
+Token	1171	1178	pos=NN
+Token	1179	1185	pos=JJ
+Token	1186	1193	pos=NN
+Token	1194	1202	pos=NN
+Token	1203	1208	pos=NN
+Token	1209	1213	pos=NN
+Token	1214	1216	pos=NN
+Token	1217	1265	pos=IN
+Token	1266	1272	pos=NN
+Token	1273	1277	pos=NN
+Token	1278	1286	pos=CD
+Token	1287	1292	pos=JJ
+Token	1293	1298	pos=NNS
+Token	1299	1301	pos=IN
+Token	1302	1307	pos=CD
+Token	1308	1309	pos=NN
+Token	1310	1312	pos=CD
+Token	1313	1315	pos=IN
+Token	1316	1319	pos=CD
+Token	1320	1322	pos=NN
+Token	1323	1325	pos=CD
+Token	1326	1330	pos=NN
+Token	1331	1334	pos=JJ
+Token	1335	1339	pos=NN
+Token	1340	1347	pos=VBZ
+Token	1348	1356	pos=NN
+Token	1357	1365	pos=NN
+Token	1366	1374	pos=NN
+Token	1375	1383	pos=NN
+Token	1384	1396	pos=NN
+Token	1397	1401	pos=VBN
+Token	1402	1409	pos=JJ
+Token	1410	1415	pos=NNS
+Token	1416	1419	pos=RB
+Token	1420	1421	pos=CD
+Token	1422	1427	pos=NN
+Token	1428	1435	pos=NN
+Token	1436	1438	pos=NN
+Token	1439	1445	pos=NN
+Token	1446	1456	pos=NN
+Token	1457	1464	pos=NN
+Token	1465	1469	pos=NN
+Token	1470	1472	pos=NN
+Token	1473	1482	pos=VBN
+Token	1483	1492	pos=RB
+Token	1493	1503	pos=VBN
+Token	1504	1511	pos=NN
+Token	1512	1519	pos=VBZ
+Token	1520	1527	pos=VBG
+Token	1528	1532	pos=RB
+Token	1533	1539	pos=VBZ
+Token	1540	1545	pos=NN
+Token	1546	1550	pos=NN
+Token	1551	1560	pos=NN
+Token	1561	1567	pos=NN
+Token	1568	1571	pos=NN
+Token	1572	1581	pos=NN
+Token	1582	1588	pos=NN
+Token	1589	1597	pos=NN
+Token	1598	1607	pos=NN
+Token	1608	1614	pos=VBG
+Token	1615	1626	pos=NNS
+Token	1627	1635	pos=VBN
+Token	1636	1644	pos=NN
+Token	1645	1651	pos=VBZ
+Token	1652	1655	pos=JJ
+Token	1656	1659	pos=NN
+Token	1660	1666	pos=NN
+Token	1667	1676	pos=NN
+Token	1677	1686	pos=NN
+Token	1687	1691	pos=CD
+Token	1692	1698	pos=NNS
+Token	1699	1706	pos=VBN
+Token	1707	1714	pos=VBN
+Token	1715	1717	pos=IN
+Token	1718	1722	pos=JJ
+Token	1723	1733	pos=NN
+Token	1734	1738	pos=NN
+Token	1739	1745	pos=NN
+Token	1746	1747	pos=CD
+Token	1748	1752	pos=NN
+Token	1753	1755	pos=NN
+Token	1756	1761	pos=VBN
+Token	1762	1767	pos=NN
+Token	1768	1773	pos=NN
+Token	1774	1778	pos=IN
+Token	1779	1781	pos=NN
+Token	1782	1784	pos=CD
+Token	1785	1792	pos=NN
+Token	1793	1799	pos=JJ
+Token	1800	1804	pos=NN
+Token	1805	1810	pos=NN
+Token	1811	1813	pos=NN
+Token	1814	1816	pos=CD
+Token	1817	1820	pos=NN
+Token	1821	1831	pos=JJ
+Token	1832	1837	pos=NN
+Token	1838	1844	pos=NN
+Token	1845	1847	pos=CD
+Token	1848	1857	pos=VBN
+Token	1858	1860	pos=CD
+Token	1861	1865	pos=CD
+Token	1866	1876	pos=NN
+Token	1877	1883	pos=JJ
+Token	1884	1886	pos=CD
+Token	1887	1897	pos=NN
+Token	1898	1906	pos=VBN
+Token	1907	1915	pos=JJ
+Token	1916	1923	pos=NN
+Token	1924	1929	pos=JJ
+Token	1930	1938	pos=NN
+Token	1939	1945	pos=JJ
+Token	1946	1956	pos=JJ
+Token	1957	1959	pos=NN
+Token	1960	1967	pos=NN
+Token	1968	1976	pos=JJ
+Token	1977	1984	pos=NN
+Token	1985	1988	pos=NN
+Token	1989	1996	pos=NN
+Token	1997	2008	pos=JJ
+Token	2009	2017	pos=NN
+Token	2018	2020	pos=CD
+Token	2021	2023	pos=NNS
+Token	2024	2026	pos=FW
+Token	2027	2031	pos=NN
+Token	2032	2040	pos=VB
+Token	2041	2048	pos=JJ
+Token	2049	2056	pos=NN
+Token	2057	2066	pos=NN
+Token	2067	2077	pos=NN
+Token	2078	2086	pos=NN
+Token	2087	2091	pos=.
+Token	2092	2094	pos=FW
+Token	2095	2097	pos=NN
+Token	2098	2100	pos=NN
+Token	2101	2110	pos=VBN
+Token	2111	2116	pos=CD
+Token	2117	2119	pos=NN
+Token	2120	2127	pos=NN
+Token	2128	2132	pos=NN
+Token	2133	2146	pos=NN
+Token	2147	2155	pos=NN
+Token	2156	2160	pos=NN
+Token	2161	2168	pos=VBZ
+Token	2169	2173	pos=JJ
+Token	2174	2177	pos=NN
+Token	2178	2182	pos=NN
+Token	2183	2184	pos=NN
+Token	2185	2191	pos=NN
+Token	2192	2194	pos=NN
+Token	2195	2201	pos=NN
+Token	2202	2206	pos=NN
+Token	2207	2215	pos=CD
+Token	2216	2228	pos=NN
+Token	2229	2235	pos=RB
+Token	2236	2242	pos=JJ
+Token	2243	2247	pos=CD
+Token	2248	2252	pos=NN
+Token	2253	2259	pos=NN
+Token	2260	2267	pos=NN
+Token	2268	2276	pos=NN
+Token	2277	2285	pos=CC
+Token	2286	2288	pos=JJ
+Token	2289	2294	pos=NN
+Token	2295	2303	pos=CD
+Token	2304	2307	pos=CD
+Token	2308	2315	pos=CD
+Token	2316	2324	pos=CD
+Token	2325	2332	pos=NN
+Token	2333	2340	pos=JJ
+Token	2341	2348	pos=NN
+Token	2349	2356	pos=NN
+Token	2357	2366	pos=CC
+Token	2367	2371	pos=NN
+Token	2372	2379	pos=VBZ
+Token	2380	2386	pos=JJ
+Token	2387	2395	pos=NN
+Token	2396	2401	pos=NN
+Token	2402	2409	pos=NN
+Token	2410	2417	pos=NN
+Token	2418	2426	pos=NN
+Token	2427	2435	pos=NN
+Token	2436	2448	pos=NN
+Token	2449	2453	pos=RB
+Token	2454	2461	pos=JJ
+Token	2462	2472	pos=NN
+Token	2473	2474	pos=CD
+Token	2475	2481	pos=NNS
+Token	2482	2485	pos=RB
+Token	2486	2493	pos=VBN
+Token	2494	2505	pos=DT
+Token	2506	2513	pos=NN
+Token	2514	2519	pos=VBZ
+Token	2520	2528	pos=VBN
+Token	2529	2534	pos=NN
+Token	2535	2543	pos=JJ
+Token	2544	2555	pos=NN
+Token	2556	2563	pos=RB
+Token	2564	2568	pos=JJ
+Token	2569	2574	pos=NN
+Token	2575	2583	pos=NN
+Token	2584	2589	pos=NN
+Token	2590	2598	pos=NN
+Token	2599	2604	pos=CD
+Token	2605	2610	pos=NN
+Token	2611	2613	pos=CD
+Token	2614	2619	pos=NN
+Token	2620	2625	pos=NN
+Token	2626	2637	pos=RB
+Token	2638	2643	pos=NN
+Token	2644	2651	pos=JJ
+Token	2652	2656	pos=NN
+Token	2657	2663	pos=NN
+Token	2664	2672	pos=JJ
+Token	2673	2675	pos=NN
+Token	2676	2678	pos=NN
+Token	2679	2687	pos=JJ
+Token	2688	2690	pos=NN
+Token	2691	2693	pos=NN
+Token	2694	2700	pos=NN
+Token	2701	2708	pos=NN
+Token	2709	2713	pos=NN
+Token	2714	2723	pos=NN
+Token	2724	2732	pos=JJ
+Token	2733	2738	pos=NN
+Token	2739	2745	pos=NNS
+Token	2746	2751	pos=JJR
+Token	2752	2763	pos=NNS
+Token	2764	2769	pos=NN
+Token	2770	2779	pos=NN
+Token	2780	2790	pos=NN
+Token	2791	2795	pos=NN
+Token	2796	2797	pos=CD
+Token	2798	2806	pos=NN
+Token	2807	2815	pos=NN
+Token	2816	2823	pos=NN
+Token	2824	2831	pos=VBZ
+Token	2832	2837	pos=NN
+Token	2838	2844	pos=NNS
+Token	2845	2851	pos=VBN
+Token	2852	2858	pos=CD
+Token	2859	2866	pos=NNS
+Token	2867	2874	pos=IN
+Token	2875	2879	pos=JJ
+Token	2880	2887	pos=NN
+Token	2888	2896	pos=NN
+Token	2897	2905	pos=NNS
+Token	2906	2914	pos=VB
+Token	2915	2922	pos=JJ
+Token	2923	2932	pos=NN
+Token	2933	2943	pos=RB
+Token	2944	2948	pos=JJ
+Token	2949	2953	pos=NN
+Token	2954	2960	pos=NN
+Token	2961	2971	pos=NN
+Token	2972	2975	pos=IN
+Token	2976	2984	pos=JJ
+Token	2985	2987	pos=NN
+Token	2988	2994	pos=NN
+Token	2995	3005	pos=NN
+Token	3006	3009	pos=NN
+Token	3010	3017	pos=VBZ
+Token	3018	3022	pos=JJ
+Token	3023	3028	pos=NN
+Token	3029	3030	pos=LS
+Token	3031	3043	pos=NN
+Token	3044	3052	pos=NNS
+Token	3053	3061	pos=RB
+Token	3062	3070	pos=RB
+Token	3071	3080	pos=VBN
+Token	3081	3083	pos=CD
+Token	3084	3086	pos=NNS
+Token	3087	3089	pos=CD
+Token	3090	3092	pos=NNS
+Token	3093	3104	pos=NN
+Token	3105	3115	pos=NN
+Token	3116	3125	pos=VBN
+Token	3126	3128	pos=CD
+Token	3129	3131	pos=NNS
+Token	3132	3148	pos=NN
+Token	3149	3157	pos=NNS
+Token	3158	3163	pos=NN
+Token	3164	3168	pos=NN
+Token	3169	3180	pos=NN
+Token	3181	3183	pos=CD
+Token	3184	3188	pos=NN
+Token	3189	3195	pos=IN
+Token	3196	3201	pos=NN
+Token	3202	3210	pos=NN
+Token	3211	3218	pos=VBZ
+Token	3219	3229	pos=NN
+Token	3230	3238	pos=VBN
+Token	3239	3244	pos=NN
+Token	3245	3257	pos=NN
+Token	3258	3263	pos=NN
+Token	3264	3265	pos=CD
+Token	3266	3272	pos=NN
+Token	3273	3276	pos=IN
+Token	3277	3283	pos=JJ
+Token	3284	3294	pos=JJ
+Token	3295	3301	pos=NN
+Token	3302	3307	pos=NN
+Token	3308	3309	pos=CD
+Token	3310	3317	pos=JJ
+Token	3318	3328	pos=NN
+Token	3329	3340	pos=NN
+Token	3341	3343	pos=NN
+Token	3344	3352	pos=NNS
+Token	3353	3358	pos=NN
+Token	3359	3367	pos=VBN
+Token	3368	3375	pos=VBZ
+Token	3376	3380	pos=JJ
+Token	3381	3386	pos=NN
+Token	3387	3398	pos=VBN
+Token	3399	3408	pos=NN
+Token	3409	3415	pos=IN
+Token	3416	3421	pos=NN
+Token	3422	3424	pos=NN
+Token	3425	3435	pos=NN
+Token	3436	3452	pos=NN
+Token	3453	3460	pos=NN
+Token	3461	3478	pos=NNS
+Token	3479	3481	pos=VBN
+Token	3482	3488	pos=CD
+Token	3489	3491	pos=NN
+Token	3492	3498	pos=CD
+Token	3499	3501	pos=NNS
+Token	3502	3508	pos=CD
+Token	3509	3515	pos=NN
+Token	3516	3520	pos=NN
+Token	3521	3529	pos=CD
+Token	3530	3537	pos=NN
+Token	3538	3546	pos=NN
+Token	3547	3555	pos=IN
+Token	3556	3564	pos=CD
+Token	3565	3571	pos=IN
+Token	3572	3577	pos=NN
+Token	3578	3580	pos=NN
+Token	3581	3588	pos=NN
+Token	3589	3595	pos=NN
+Token	3596	3602	pos=NN
+Token	3603	3607	pos=NN
+Token	3608	3612	pos=CD
+Token	3613	3622	pos=NNS
+Token	3623	3627	pos=JJ
+Token	3628	3636	pos=JJ
+Token	3637	3639	pos=JJ
+Token	3640	3645	pos=NN
+Token	3646	3650	pos=NN
+Token	3651	3653	pos=NN
+Token	3654	3659	pos=NN
+Token	3660	3668	pos=NN
+Token	3669	3673	pos=NN
+Token	3674	3676	pos=NN
+Token	3677	3684	pos=NN
+Token	3685	3689	pos=NN
+Token	3690	3703	pos=VBN
+Token	3704	3709	pos=NN
+Token	3710	3717	pos=NN
+Token	3718	3726	pos=VBN
+Token	3727	3735	pos=CD
+Token	3736	3739	pos=CD
+Token	3740	3745	pos=NN
+Token	3746	3754	pos=NN
+Token	3755	3764	pos=NN
+Token	3765	3774	pos=JJ
+Token	3775	3779	pos=NN
+Token	3780	3790	pos=NN
+Token	3791	3800	pos=NN
+Token	3801	3804	pos=MD
+Token	3805	3812	pos=JJ
+Token	3813	3817	pos=NN
+Token	3818	3820	pos=VBN
+Token	3821	3829	pos=NNS
+Token	3830	3835	pos=NN
+Token	3836	3843	pos=NN
+Token	3844	3848	pos=NN
+Token	3849	3860	pos=VBG
+Token	3861	3870	pos=JJ
+Token	3871	3873	pos=NN
+Token	3874	3884	pos=NN
+Token	3885	3894	pos=CC
+Token	3895	3900	pos=JJ
+Token	3901	3910	pos=NN
+Token	3911	3916	pos=NN
+Token	3917	3918	pos=CD
+Token	3919	3925	pos=NNS
+Token	3926	3932	pos=NN
+Token	3933	3937	pos=NN
+Token	3938	3948	pos=VBG
+Token	3949	3958	pos=JJ
+Token	3959	3964	pos=NN
+Token	3965	3976	pos=NNS
+Token	3977	3981	pos=NN
+Token	3982	3991	pos=NN
+Token	3992	4000	pos=VBN
+Token	4001	4013	pos=NNS
+Token	4014	4017	pos=NN
+Token	4018	4028	pos=NNS
+Token	4029	4041	pos=NN
+Token	4042	4051	pos=NN
+Token	4052	4067	pos=NN
+Token	4068	4077	pos=IN
+Token	4078	4080	pos=CD
+Token	4081	4090	pos=NNS
+Token	4091	4099	pos=NN
+Token	4100	4110	pos=NN
+Token	4111	4118	pos=JJ
+Token	4119	4125	pos=JJ
+Token	4126	4134	pos=NN
+Token	4135	4148	pos=RB
+Token	4149	4151	pos=CD
+Token	4152	4154	pos=NNS
+Token	4155	4156	pos=CD
+Token	4157	4159	pos=NNS
+Token	4160	4174	pos=NN
+Token	4175	4181	pos=VBD
+Token	4182	4190	pos=NN
+Token	4191	4199	pos=NN
+Token	4200	4213	pos=RB
+Token	4214	4216	pos=CD
+Token	4217	4219	pos=NNS
+Token	4220	4229	pos=NN
+Token	4230	4232	pos=CD
+Token	4233	4241	pos=JJ
+Token	4242	4247	pos=JJ
+Token	4248	4257	pos=NN
+Token	4258	4262	pos=JJ
+Token	4263	4271	pos=NN
+Token	4272	4274	pos=NN
+Token	4275	4283	pos=NN
+Token	4284	4290	pos=JJ
+Token	4291	4293	pos=NN
+Token	4294	4302	pos=NN
+Token	4303	4311	pos=IN
+Token	4312	4321	pos=JJ
+Token	4322	4324	pos=NN
+Token	4325	4333	pos=NN
+Token	4334	4336	pos=CD
+Token	4337	4341	pos=NN
+Token	4342	4347	pos=JJ
+Token	4348	4354	pos=JJ
+Token	4355	4363	pos=NN
+Token	4364	4372	pos=NN
+Token	4373	4382	pos=IN
+Token	4383	4388	pos=JJ
+Token	4389	4394	pos=NN
+Token	4395	4410	pos=NN
+Token	4411	4419	pos=VBN
+Token	4420	4425	pos=JJ
+Token	4426	4432	pos=JJ
+Token	4433	4441	pos=NN
+Token	4442	4443	pos=CD
+Token	4444	4453	pos=JJ
+Token	4454	4463	pos=JJ
+Token	4464	4469	pos=NN
+Token	4470	4478	pos=NN
+Token	4479	4481	pos=CD
+Token	4482	4484	pos=NN
+Token	4485	4493	pos=NN
+Token	4494	4498	pos=CD
+Token	4499	4508	pos=JJ
+Token	4509	4514	pos=JJ
+Token	4515	4517	pos=NN
+Token	4518	4531	pos=NN
+Token	4532	4542	pos=NN
+Token	4543	4545	pos=NN
+Token	4546	4559	pos=NN
+Token	4560	4569	pos=VBN
+Token	4570	4575	pos=NN
+Token	4576	4585	pos=NNS
+Token	4586	4599	pos=RB
+Token	4600	4603	pos=CD
+Token	4604	4606	pos=NNS
+Token	4607	4612	pos=VBN
+Token	4613	4624	pos=NN
+Token	4625	4632	pos=NN
+Token	4633	4638	pos=NN
+Token	4639	4650	pos=NN
+Token	4651	4661	pos=IN
+Token	4662	4668	pos=JJ
+Token	4669	4677	pos=NNS
+Token	4678	4690	pos=IN
+Token	4691	4698	pos=NN
+Token	4699	4705	pos=IN
+Token	4706	4712	pos=JJ
+Token	4713	4715	pos=CD
+Token	4716	4718	pos=CD
+Token	4719	4730	pos=NNS
+Token	4731	4739	pos=NN
+Token	4740	4743	pos=NN
+Token	4744	4748	pos=JJ
+Token	4749	4762	pos=NN
+Token	4763	4771	pos=NN
+Token	4772	4780	pos=NN
+Token	4781	4786	pos=NN
+Token	4787	4794	pos=NN
+Token	4795	4806	pos=NNS
+Token	4807	4811	pos=RB
+Token	4812	4821	pos=JJ
+Token	4822	4826	pos=NN
+Token	4827	4834	pos=NN
+Token	4835	4843	pos=NN
+Token	4844	4850	pos=JJ
+Token	4851	4859	pos=NN
+Token	4860	4864	pos=NN
+Token	4865	4869	pos=NN
+Token	4870	4879	pos=NN
+Token	4880	4887	pos=NN
+Token	4888	4894	pos=NN
+Token	4895	4902	pos=IN
+Token	4903	4911	pos=JJ
+Token	4912	4918	pos=NN
+Token	4919	4927	pos=NNS
+Token	4928	4939	pos=NNS
+Token	4940	4947	pos=IN
+Token	4948	4950	pos=CD
+Token	4951	4954	pos=NN
+Token	4955	4960	pos=CD
+Token	4961	4963	pos=CD
+Token	4964	4966	pos=NNS
+Token	4967	4969	pos=FW
+Token	4970	4973	pos=FW
+Token	4974	4982	pos=NN
+Token	4983	4986	pos=CD
+Token	4987	4992	pos=RB
+Token	4993	5003	pos=NN
+Token	5004	5013	pos=VBN
+Token	5014	5016	pos=CD
+Token	5017	5019	pos=NNS
+Token	5020	5022	pos=CD
+Token	5023	5025	pos=NNS
+Token	5026	5034	pos=NNS
+Token	5035	5046	pos=NN
+Token	5047	5052	pos=MD
+Token	5053	5062	pos=RB
+Token	5063	5072	pos=VBN
+Token	5073	5075	pos=CD
+Token	5076	5080	pos=NN
+Token	5081	5082	pos=CD
+Token	5083	5085	pos=NNS
+Token	5086	5095	pos=JJ
+Token	5096	5101	pos=NN
+Token	5102	5113	pos=JJ
+Token	5114	5124	pos=NN
+Token	5125	5131	pos=NN
+Token	5132	5134	pos=CD
+Token	5135	5137	pos=NNS
+Token	5138	5143	pos=RB
+Token	5144	5148	pos=RB
+Token	5149	5160	pos=IN
+Token	5161	5163	pos=CD
+Token	5164	5173	pos=NN
+Token	5174	5179	pos=NN
+Token	5180	5188	pos=NN
+Token	5189	5194	pos=CD
+Token	5195	5202	pos=JJ
+Token	5203	5209	pos=JJ
+Token	5210	5218	pos=NN
+Token	5219	5221	pos=CD
+Token	5222	5224	pos=NNS
+Token	5225	5235	pos=NN
+Token	5236	5238	pos=CD
+Token	5239	5242	pos=NN
+Token	5243	5245	pos=CD
+Token	5246	5256	pos=NN
+Token	5257	5259	pos=CD
+Token	5260	5265	pos=JJ
+Token	5266	5271	pos=NN
+Token	5272	5277	pos=NN
+Token	5278	5282	pos=CD
+Token	5283	5292	pos=NN
+Token	5293	5295	pos=CD
+Token	5296	5302	pos=NN
+Token	5303	5306	pos=CD
+Token	5307	5312	pos=NN
+Token	5313	5321	pos=NN
+Token	5322	5333	pos=NN
+Token	5334	5338	pos=NN
+Token	5339	5345	pos=NN
+Token	5346	5350	pos=NN
+Token	5351	5356	pos=NN
+Token	5357	5363	pos=NN
+Token	5364	5371	pos=NN
+Token	5372	5376	pos=NN
+Token	5377	5381	pos=NN
+Token	5382	5388	pos=RB
+Token	5389	5399	pos=VBN
+Token	5400	5404	pos=JJ
+Token	5405	5416	pos=NN
+Token	5417	5421	pos=RB
+Token	5422	5427	pos=JJ
+Token	5428	5439	pos=NN
+Token	5440	5441	pos=CD
+Token	5442	5448	pos=NNS
+Token	5449	5452	pos=NN
+Token	5453	5461	pos=VBZ
+Token	5462	5468	pos=NNS
+Token	5469	5474	pos=MD
+Token	5475	5484	pos=VB
+Token	5485	5491	pos=NN
+Token	5492	5497	pos=RB
+Token	5498	5506	pos=NN
+Token	5507	5514	pos=NN
+Token	5515	5526	pos=NN
+Token	5527	5530	pos=NN
+Token	5531	5533	pos=NN
+Token	5534	5542	pos=IN
+Token	5543	5551	pos=CD
+Token	5552	5559	pos=NN
+Token	5560	5567	pos=NN
+Token	5568	5577	pos=NN
+Token	5578	5582	pos=NN
+Token	5583	5588	pos=MD
+Token	5589	5594	pos=VB
+Token	5595	5601	pos=JJ
+Token	5602	5611	pos=NNS
+Token	5612	5621	pos=IN
+Token	5622	5628	pos=NN
+Token	5629	5636	pos=NN
+Token	5637	5643	pos=NN
+Token	5644	5646	pos=NN
+Token	5647	5657	pos=NN
+Token	5658	5674	pos=NN
+Token	5675	5682	pos=IN
+Token	5683	5685	pos=JJ
+Token	5686	5693	pos=NN
+Token	5694	5702	pos=NN
+Token	5703	5705	pos=NN
+Token	5706	5708	pos=CD
+Token	5709	5715	pos=NN
+Token	5716	5720	pos=NN
+Token	5721	5735	pos=JJ
+Token	5736	5744	pos=NN
+Token	5745	5756	pos=NN
+Token	5757	5759	pos=JJ
+Token	5760	5765	pos=NN
+Token	5766	5768	pos=NN
+Token	5769	5775	pos=CD
+Token	5776	5778	pos=NN
+Token	5779	5785	pos=CD
+Token	5786	5788	pos=NNS
+Token	5789	5795	pos=CD
+Token	5796	5800	pos=NN

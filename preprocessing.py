@@ -159,7 +159,7 @@ def write_labels_to_files(labels_array):
 
 def get_text_dictionary(text_array):
 	"""
-	Takes in a array of string arrays and returns dictionary of word counts for the input
+	Takes in an array of string arrays and returns dictionary of word counts for the input
 	and the number of distinct words
 	"""
 	word_counts = defaultdict(int)
@@ -170,20 +170,34 @@ def get_text_dictionary(text_array):
 
 	return word_counts, len(word_counts)
 
-
-def get_text_dictionary_split(text_array, labels_array, i):
+def get_text_dictionary_split(text_array, labels_array, i, avg=False):
 	"""
+	Tkes in an array of string arrays, an array of the corresponding labels, an
+	integer i representing a split on the feature i and a bool flag avg. 
 	"""
 	word_counts_met = defaultdict(int) # initalize dictionaries for met and not met
 	word_counts_not = defaultdict(int)
 
+	met_count = 0
+	not_count = 0
+
 	for j in range(len(text_array)):
 		met = labels_array[j][i] == '1' # if the class was met in the given file
+		if met:
+			met_count+=1
+		else:
+			not_count+=1
 		for word in text_array[j]:
 			if met:
 				word_counts_met[word]+=1 # count occurences
 			else:
 				word_counts_not[word]+=1 # count occurences
+
+	if avg:
+		word_counts_met = {k: v/met_count for k,v in word_counts_met.iteritems()} # get averages for each dict
+		word_counts_not = {k: v/not_count for k,v in word_counts_not.iteritems()}
+		print met_count
+		print not_count
 
 	return word_counts_met, word_counts_not
 
@@ -216,7 +230,7 @@ def plot_common_words(word_counts, k):
 
 	plt.show()
 
-def plot_stacked_words(text_array, labels_array, word_counts, k):
+def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
 	"""
 	Plots 12 stacked bar charts (one for each label class). Each stacked bar chart displays
 	the k most common words. The stacks are the counts for a given word in the files where
@@ -224,7 +238,7 @@ def plot_stacked_words(text_array, labels_array, word_counts, k):
 	"""
 
 	ind = np.arange(k)
-	width = 2.2/k
+	width = 4.0/k if avg else 2.0/k
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
 				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
@@ -235,17 +249,20 @@ def plot_stacked_words(text_array, labels_array, word_counts, k):
 	
 		labels = [sorted_counts[j][0] for j in range(k)] # labels of each bar
 
-		word_counts_met, word_counts_not = get_text_dictionary_split(text_array, labels_array, i) # get word counts for met and not met
+		word_counts_met, word_counts_not = get_text_dictionary_split(text_array, labels_array, i, avg) # get word counts for met and not met
 
 		met_counts = [word_counts_met[labels[j]] for j in range(k)] # word counts for met
 		not_counts = [word_counts_not[labels[j]] for j in range(k)] # word counts for not met
 
-		p1 = plt.bar(ind, met_counts, color='#d62728') # create splits for bar chart
-		p2 = plt.bar(ind, not_counts, bottom=met_counts)
+		p1 = plt.bar(ind, met_counts, width, color='r') # create splits for bar chart
+		p2 =  plt.bar(ind + width, not_counts, width, color='y') if avg \
+		else plt.bar(ind, not_counts, bottom=met_counts)
 
 		plt.ylabel('Counts')
-		plt.title('Counts of Most Common Words Split on ' + tag_names[i] + ' Met/Not Met')
-		plt.xticks(ind, labels)
+		title = 'Counts of Most Common Words Split on ' + tag_names[i] + ' Avg' if avg \
+				else 'Counts of Most Common Words Split on ' + tag_names[i] + ' Met/Not Met'
+		plt.title(title)
+		plt.xticks(ind + (avg*width/2), labels)
 		plt.legend((p1[0], p2[0]), ('Met most common words', 'Not met most common words'))
 
 		plt.show()
@@ -308,6 +325,19 @@ def create_y_data():
 
 	return label_matrix
 
+def generate_clamp_files():
+	"""
+	Generates the CLAMP files from the text medical records. Make sure to adjust the input and output 
+	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
+	"""
+	path = os.getcwd()
+    path += '/ClampCmd_1.4.0'
+    os.chdir(path)
+    newPath = os.getcwd()
+    os.system('pwd')
+    os.system('./run_ner_pipeline.sh')
+    os.system('./run_attribute_pipeline.sh')
+
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
@@ -317,10 +347,11 @@ def main() :
 	labels_array = get_all_labels()
 	word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
-	plot_stacked_words(text_array, labels_array, word_counts, 10)
+	plot_stacked_words(text_array, labels_array, word_counts, 10, avg=True)
 	X = create_X_data(text_array, word_counts, 12, 15)
 	y = create_y_data()
-	print distinct_words	
+	print distinct_words
+	# generate_clamp_files() run once to get CLAMP files from txt files
 
 
 
