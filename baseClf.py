@@ -16,7 +16,7 @@ def main():
     text_array = pre.get_all_text()
     word_counts, length = pre.get_text_dictionary(text_array)
     #Get data
-    X = pre.create_X_data(text_array, word_counts, 12, 15)[:-1]
+    X = pre.create_X_data(text_array, word_counts, 12, 15)
     y = pre.create_y_data()
 
     kfs = []
