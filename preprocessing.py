@@ -11,6 +11,9 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet
 from nltk.stem.wordnet import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
 
@@ -414,7 +417,7 @@ def create_y_data():
 
 def create_tfidf_data():
 	"""
-	Creates a 202x28503 matrix. Each entry (i,j) gives the tfidf of word j in 
+	Creates a 202x15 matrix. Each entry (i,j) gives the tfidf of word j in 
 	file number i. 
 	"""
 	text_dict = get_text_for_tfidf()
@@ -429,12 +432,12 @@ def generate_clamp_files():
 	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
 	"""
 	path = os.getcwd()
-    path += '/ClampCmd_1.4.0'
-    os.chdir(path)
-    newPath = os.getcwd()
-    os.system('pwd')
-    os.system('./run_ner_pipeline.sh')
-    os.system('./run_attribute_pipeline.sh')
+	path += '/ClampCmd_1.4.0'
+	os.chdir(path)
+	newPath = os.getcwd()
+	os.system('pwd')
+	os.system('./run_ner_pipeline.sh')
+	os.system('./run_attribute_pipeline.sh')
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
@@ -445,13 +448,12 @@ def main() :
 	labels_array = get_all_labels()
 	word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
-	plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
-	plot_word_differences(text_array, labels_array, 6)
-	X = create_X_data(text_array, word_counts, 12, 15)
-	y = create_y_data()
+	# plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
+	# plot_word_differences(text_array, labels_array, 6)
+	# X = create_X_data(text_array, word_counts, 12, 15)
+	# y = create_y_data()
 	tfs = create_tfidf_data()
 	print tfs
-	print distinct_words	
 	print distinct_words
 	# generate_clamp_files() run once to get CLAMP files from txt files
 
