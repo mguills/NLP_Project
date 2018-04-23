@@ -88,7 +88,7 @@ def get_labels_from_xml(filename):
 	dom = parse(filename) # parse the xml file
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
-				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C"
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C",
 				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 
 	tag_values = [dom.getElementsByTagName(tag_names[i])[0].getAttribute("met") for i in range(len(tag_names))] # get "met" or "not met" for each tag
@@ -530,11 +530,11 @@ def get_semantic_list():
 			semantic_dict[str(file)] = semantics
 	return semantic_dict
 
-# def main() :
+def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
-	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
+	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
-	# write_labels_to_files(labels_array) # run once to save labels from xml files to disk
+	write_labels_to_files(labels_array) # run once to save labels from xml files to disk
 	# text_array = get_all_text()
 	# labels_array = get_all_labels()
 	# create_clamp_data_word(labels_array)
@@ -551,5 +551,5 @@ def get_semantic_list():
 
 
 
-# if __name__ == "__main__" :
-# 	main()
+if __name__ == "__main__" :
+	main()
