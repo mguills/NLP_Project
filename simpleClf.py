@@ -23,8 +23,9 @@ def get_AUROC(X,y):
         
         clf_i.fit(X_train,y_train)
         y_score = clf_i.decision_function(X_test)
-        AUROC = metrics.roc_auc_score(y_test, y_score)
-        test_scores.append(clf_i.score(X_test,y_test))
+        if len(np.unique(y_test)) != 1:
+            AUROC = metrics.roc_auc_score(y_test, y_score)
+            test_scores.append(clf_i.score(X_test,y_test))
             
     test_mean = np.mean(test_scores)
     test_std = np.std(test_scores)
@@ -120,7 +121,7 @@ def main():
     rVals = [1]
     entropies, bestRndx = getEntropyDict(rVals)
 
-    for i in range(len(y)):
+    for i in range(len(y[0])):
         wordEntropies = entropies[i]
         #Adjust wordEntropies
         for key in wordEntropies.keys():
@@ -132,7 +133,8 @@ def main():
             test_mean, test_std = get_AUROC(X,y[:,i])
             test_means.append(test_mean)
             test_stds.append(test_std)
-        print "for label", i, "Average AUROC is:", test_means 
+        print "for label", i, "Average AUROC is:", test_means
+        print 'with a maximum at d = ', np.arange(1,100,5)[np.argmax(test_means)]
 
 
 if __name__ == "__main__" :
