@@ -15,7 +15,6 @@ from entropy import getEntropyDict
 def get_AUROC(X,y):
     clf_i = SVC(kernel = 'linear', class_weight = 'balanced')
     test_scores = []
-    train_scores = []
     for i in range(10):
         X_train = np.append(X[:20*i],X[20*(i+1):],axis = 0)
         y_train = np.append(y[:20*i],y[20*(i+1):],axis = 0)
@@ -23,16 +22,13 @@ def get_AUROC(X,y):
         y_test = y[20*i:20*(i+1)]
         
         clf_i.fit(X_train,y_train)
-        y_score = clf_i.decision_function()
-        AUROC = metrics.roc_auc_score(y, y_score())
+        y_score = clf_i.decision_function(X_test)
+        AUROC = metrics.roc_auc_score(y_test, y_score)
         test_scores.append(clf_i.score(X_test,y_test))
-        train_scores.append(clf_i.score(X_train, y_train))
             
-        test_mean = np.mean(test_scores)
-        test_std = np.std(test_scores)
-        train_mean = np.mean(train_scores)
-        train_std = np.std(train_scores)
-    return test_mean, train_mean, test_std, train_std
+    test_mean = np.mean(test_scores)
+    test_std = np.std(test_scores)
+    return test_mean, test_std
 
 
 '''
@@ -119,9 +115,9 @@ def main():
     X = pre.create_X_data(text_array, word_counts, 15, 15)
     y = pre.create_y_data()
 
-    test_means, train_means, test_stds, train_stds = get_means(X,y)
+    #test_means, train_means, test_stds, train_stds = get_means(X,y)
     
-    rVals = [1,5,10,15,20]
+    rVals = [1]
     entropies, bestRndx = getEntropyDict(rVals)
 
     for i in range(len(y)):
@@ -130,15 +126,13 @@ def main():
         for key in wordEntropies.keys():
             wordEntropies[key] = wordEntropies[key][bestRndx[i]]
         test_means = []
-        train_means = []
-        test_std = []
-        train_std = []
-        for d in arange(1,100,5):
+        test_stds = []
+        for d in np.arange(1,100,5):
             X = pre.create_X_data(text_array, wordEntropies, d, rVals[bestRndx[i]], True)
             test_mean, test_std = get_AUROC(X,y[:,i])
             test_means.append(test_mean)
-            test_std.append(test_std)
-        plot(test_means, train_means, test_stds, train_stds)
+            test_stds.append(test_std)
+        print "for label", i, "Average AUROC is:", test_means 
 
 
 if __name__ == "__main__" :
