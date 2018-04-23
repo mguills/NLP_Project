@@ -20,8 +20,6 @@ def get_AUROC(X,y):
         y_train = np.append(y[:20*i],y[20*(i+1):],axis = 0)
         X_test = X[20*i:20*(i+1)]
         y_test = y[20*i:20*(i+1)]
-        print X_train.shape
-        print y_train.shape
         clf_i.fit(X_train,y_train)
         y_score = clf_i.decision_function(X_test)
         if len(np.unique(y_test)) != 1:
