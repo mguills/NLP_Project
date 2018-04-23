@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from sklearn.dummy import DummyClassifier
 from sklearn import model_selection
-
+import operator
 def entropy(y):
 	if(len(y) == 0):
 		return 0
@@ -73,3 +73,36 @@ def getEntropyDict(rVals):
 		bestRndx[label] = np.argmin(avgs)
 
 	return allEntropies, bestRndx
+
+
+def getClampEntropy():
+	y = pre.create_y_data()
+	kval_Dict= {}
+	for i in range(1, len(pre.SEMANTICS)):
+		allEntropies = []
+		diagList = pre.create_diagnosis_list(i)
+		X = pre.create_CLAMP_data_diag(i)
+		n,d = X.shape
+		for label in range(len(y[0])):
+			entropyDict = {}
+			for diagnosis in range(n):
+				e = conditional_entropy(X[:, diagnosis], y[:, label])
+				entropyDict[diagList[diagnosis]] = e
+			sorted_entropy = sorted(entropyDict.items(), key=operator.itemgetter(1),reverse=False)
+			allEntropies.append(sorted_entropy)
+		kval_Dict[i] = allEntropies
+	return kval_Dict
+
+
+def getMinEntropies(kval_Dict, n_words):
+	y = pre.create_y_data()
+	bestEntropies = [[]] * len(kval_Dict.keys())
+	for i in range(len(kval_Dict.keys())):
+		currentEntropies = [[]] * len(y[0])
+		for classifierVals in range(len(kval_Dict[i+1])):
+			currentEntropies[classifierVals] = kval_Dict[i+1][classifierVals][:n_words]
+		bestEntropies[i] = currentEntropies	
+	return bestEntropies
+
+kvals = getClampEntropy()
+print getMinEntropies(kvals, 5)
