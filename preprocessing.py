@@ -12,6 +12,7 @@ from nltk.corpus import wordnet
 from nltk.stem.wordnet import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
 
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
@@ -417,7 +418,7 @@ def create_y_data():
 
 def create_tfidf_data():
 	"""
-	Creates a 202x28503 matrix. Each entry (i,j) gives the tfidf of word j in 
+	Creates a 202x15 matrix. Each entry (i,j) gives the tfidf of word j in 
 	file number i. 
 	"""
 	text_dict = get_text_for_tfidf()
@@ -434,10 +435,50 @@ def generate_clamp_files():
 	path = os.getcwd()
 	path += '/ClampCmd_1.4.0'
 	os.chdir(path)
+<<<<<<< HEAD
 	newPath = os.getcwd()
 	os.system('pwd')
 	os.system('./run_ner_pipeline.sh')
 	os.system('./run_attribute_pipeline.sh')
+=======
+	os.system('pwd')
+	os.system('./run_ner_pipeline.sh')
+	os.system('./run_attribute_pipeline.sh')
+
+
+def semantic_list():
+	semantic_dict = {}
+	for file in os.listdir("ClampCmd_1.4.0/attribute_output"):
+		semantics = {"drug":[] , "treatment": [], "test": [], "problem": [], "temporal":[],  "BDL": [], "SEV": [] , "labvalue" : [], "COU" : []}
+		if '.txt' in file: #only dealing with the txt files not xmi files 
+			text = open("ClampCmd_1.4.0/attribute_output/" + file).readlines()
+			for line in text:
+				for key in semantics.keys():
+					tag = 'semantic=' + key
+					if tag in line and 'NamedEntity' in line:
+						finalLine = []
+						line = line.split('\t')
+						assertion = ''
+						diagnosis = ''
+						for item in line:
+							if "assertion=" in item:
+								assertion = item[10:].strip()
+							if "ne=" in item:
+								diagnosis = item[3:].strip()
+							if diagnosis != '':
+								if assertion == '':
+									finalLine.append(("N/A", diagnosis))
+								else:
+									finalLine.append ((assertion,diagnosis))
+						semantics[key] += finalLine
+			semantic_dict[str(file)] = semantics
+	return semantic_dict
+
+
+
+
+	
+>>>>>>> 5fa5f4285db78d06941ef8221165ae4ef3d2dc1f
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
@@ -448,14 +489,13 @@ def main() :
 	labels_array = get_all_labels()
 	word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
-	plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
-	plot_word_differences(text_array, labels_array, 6)
-	X = create_X_data(text_array, word_counts, 12, 15)
-	y = create_y_data()
+	# plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
+	# plot_word_differences(text_array, labels_array, 6)
+	# X = create_X_data(text_array, word_counts, 12, 15)
+	# y = create_y_data()
 	tfs = create_tfidf_data()
-	print tfs
-	print distinct_words	
-	print distinct_words
+	#print tfs
+	#print distinct_words
 	# generate_clamp_files() run once to get CLAMP files from txt files
 
 
