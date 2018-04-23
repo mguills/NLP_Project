@@ -503,10 +503,11 @@ def create_CLAMP_data_diag(k):
 
 
 
-	
 ######################################################################
 # MAIN
 ######################################################################
+
+
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
