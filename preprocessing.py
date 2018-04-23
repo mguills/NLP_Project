@@ -87,12 +87,12 @@ def get_labels_from_xml(filename):
 	dom = parse(filename) # parse the xml file
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
-				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C",
 				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 
-	tag_values = [dom.getElementsByTagName(tag_names[i])[0].getAttribute("met") for i in range(12)] # get "met" or "not met" for each tag
+	tag_values = [dom.getElementsByTagName(tag_names[i])[0].getAttribute("met") for i in range(len(tag_names))] # get "met" or "not met" for each tag
 
-	label_vector = [1 if tag_values[i] == "met" else 0 for i in range(12)] # make label vector for file 
+	label_vector = [1 if tag_values[i] == "met" else 0 for i in range(len(tag_names))] # make label vector for file 
 
 	return np.array(label_vector)
 
@@ -236,6 +236,67 @@ def get_text_dictionary_split(text_array, labels_array, i, avg=False):
 
 	return word_counts_met, word_counts_not
 
+def create_clamp_data_word_helper(labels_array, i):
+	"""
+	"""
+
+	semantic_list = get_semantic_list()
+
+	met_count = 0
+	not_count = 0
+
+	semantic_counts_met = {"drug": defaultdict(int), "treatment": defaultdict(int), "test": defaultdict(int), 
+							"problem": defaultdict(int), "temporal": defaultdict(int),  "BDL": defaultdict(int), 
+							"SEV": defaultdict(int), "labvalue": defaultdict(int), "COU": defaultdict(int) } 
+
+	semantic_counts_not = {"drug": defaultdict(int), "treatment": defaultdict(int), "test": defaultdict(int), 
+							"problem": defaultdict(int), "temporal": defaultdict(int),  "BDL": defaultdict(int), 
+							"SEV": defaultdict(int), "labvalue": defaultdict(int), "COU": defaultdict(int) } 
+
+	
+	for filename in semantic_list.keys():
+		filenum = int(filename[7:-4])
+		met = labels_array[filenum][i] == '1' # if the class was met in the given file
+		if met:
+			met_count+=1
+		else:
+			not_count+=1
+		for semantic in semantic_list[filename].keys():
+			for value in semantic_list[filename][semantic]:
+				if value[0] == 'present' or value[0] == 'N/A':
+					if met:
+						semantic_counts_met[semantic][value[1]] += 1
+					else:
+						semantic_counts_not[semantic][value[1]] += 1
+
+
+	for semantic in semantic_counts_met.keys():
+		for word, count in semantic_counts_met[semantic].iteritems():
+			semantic_counts_met[semantic][word] = count*1.0/met_count
+
+	for semantic in semantic_counts_not.keys():
+		for word, count in semantic_counts_not[semantic].iteritems():
+			semantic_counts_not[semantic][word] = count*1.0/not_count
+
+	return semantic_counts_met, semantic_counts_not
+
+def create_clamp_data_word(labels_array):
+	"""
+	"""
+	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C",
+				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
+
+	for i in range(len(tag_names)):
+		semantic_counts_met, semantic_counts_not = create_clamp_data_word_helper(labels_array, i)
+		for semantic in semantic_counts_met.keys():
+			met_differences, not_differences = get_word_differences(semantic_counts_met[semantic], 
+												semantic_counts_not[semantic])
+			print "Largest disparities for met in " + tag_names[i] + " " + semantic + ": "
+			print sorted(met_differences.iteritems(),key=lambda (k,v): v, reverse=True)[:5]
+			print "Largest disparities for not met in " + tag_names[i] + " " + semantic + ": "
+			print sorted(not_differences.iteritems(), key=lambda (k,v): v, reverse=True)[:5]
+
 def get_word_differences(word_counts_met, word_counts_not):
 	"""
 	Gets differences in word counts
@@ -318,7 +379,7 @@ def plot_common_words(word_counts, k):
 
 def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
 	"""
-	Plots 12 stacked bar charts (one for each label class). Each stacked bar chart displays
+	Plots 11 stacked bar charts (one for each label class). Each stacked bar chart displays
 	the k most common words. The stacks are the counts for a given word in the files where
 	the given feature was "met" and "not met".
 	"""
@@ -327,10 +388,10 @@ def plot_stacked_words(text_array, labels_array, word_counts, k, avg=False):
 	width = 4.0/k if avg else 2.0/k
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
-				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", 
 				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 
-	for i in range(12):
+	for i in range(len(tag_names)):
 		sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True) # sort words by num appearances
 	
 		labels = [sorted_counts[j][0] for j in range(k)] # labels of each bar
@@ -368,10 +429,10 @@ def plot_word_differences(text_array, labels_array, k):
 	width = 2.0/k
 
 	tag_names = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
-				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", "KETO-1YR",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C",
 				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 
-	for i in range(12):
+	for i in range(len(tag_names)):
 		word_counts_met, word_counts_not = get_text_dictionary_split(text_array, labels_array, i, True) # get word counts for met and not met
 
 		met_differences, not_differences = get_word_differences(word_counts_met, word_counts_not)
@@ -444,9 +505,9 @@ def create_y_data():
 
 	Returns
 	--------------------
-		label_matrix				-- np matrix of shape (202, 12) of label vectors for each xml file
+		label_matrix				-- np matrix of shape (202, 11) of label vectors for each xml file
 	"""
-	label_matrix = np.zeros((202, 12))
+	label_matrix = np.zeros((202, 11))
 
 	ind = 0
 	for filename in os.listdir("train"):
@@ -455,13 +516,13 @@ def create_y_data():
 
 	return label_matrix
 
-def create_tfidf_data():
+def create_tfidf_data(d):
 	"""
-	Creates a 202x15 matrix. Each entry (i,j) gives the tfidf of word j in 
-	file number i. 
+	Creates a 202xd matrix. Each entry (i,j) gives the tfidf of word j in 
+	file number i. d gives the number of features to use.
 	"""
 	text_dict = get_text_for_tfidf()
-	tfidf = TfidfVectorizer(max_features=15)
+	tfidf = TfidfVectorizer(max_features=d).fit(text_dict.values())
 	tfs = tfidf.fit_transform(text_dict.values())
 
 	return tfs
@@ -503,26 +564,57 @@ def create_CLAMP_data_diag(k):
 
 
 
+	
+
+
+def get_semantic_list():
+	semantic_dict = {}
+	for file in os.listdir("ClampCmd_1.4.0/attribute_output"):
+		semantics = {"drug":[] , "treatment": [], "test": [], "problem": [], "temporal":[],  
+					"BDL": [], "SEV": [] , "labvalue" : [], "COU" : []}
+		if '.txt' in file: #only dealing with the txt files not xmi files 
+			text = open("ClampCmd_1.4.0/attribute_output/" + file).readlines()
+			for line in text:
+				for key in semantics.keys():
+					tag = 'semantic=' + key
+					if tag in line and 'NamedEntity' in line:
+						finalLine = []
+						line = line.split('\t')
+						assertion = ''
+						diagnosis = ''
+						for item in line:
+							if "assertion=" in item:
+								assertion = item[10:].strip()
+							if "ne=" in item:
+								diagnosis = item[3:].strip()
+							if diagnosis != '':
+								if assertion == '':
+									finalLine.append(("N/A", diagnosis))
+								else:
+									finalLine.append ((assertion,diagnosis))
+						semantics[key] += finalLine
+			semantic_dict[str(file)] = semantics
+	return semantic_dict
 ######################################################################
 # MAIN
 ######################################################################
-
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
-	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
+	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
-	# write_labels_to_files(labels_array) # run once to save labels from xml files to disk
-	text_array = get_all_text()
-	labels_array = get_all_labels()
-	word_counts, distinct_words = get_text_dictionary(text_array)
+	write_labels_to_files(labels_array) # run once to save labels from xml files to disk
+	# text_array = get_all_text()
+	# labels_array = get_all_labels()
+	# create_clamp_data_word(labels_array)
+	# word_counts, distinct_words = get_text_dictionary(text_array)
 	# plot_common_words(word_counts, 10) # plot common words
 	# plot_stacked_words(text_array, labels_array, word_counts, 12, avg=True)
 	# plot_word_differences(text_array, labels_array, 6)
 	# X = create_X_data(text_array, word_counts, 12, 15)
 	# y = create_y_data()
-	tfs = create_tfidf_data()
-	#print tfs
-	#print distinct_words
+	# tfs = create_tfidf_data()
+	# print tfs
+	# print distinct_words
 	# generate_clamp_files() run once to get CLAMP files from txt files
 
 

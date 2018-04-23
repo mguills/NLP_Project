@@ -52,12 +52,11 @@ def getEntropyDict(rVals):
 	sortedWords = sorted(word_counts.items(), key = lambda word: word[1])
 
 	uniqueWords = sortedWords[-100:]
-	print uniqueWords
 	for i in range(len(uniqueWords)):
 		uniqueWords[i] = uniqueWords[i][0]
 
 	allEntropies = []
-	bestRndx = np.zeros((len(y[0])))
+	bestRndx = [0 for i in range(len(y[0]))]
 	for label in range(len(y[0])):
 		entropyDict = {}
 		avgs = [0 for i in range(len(rVals))]
