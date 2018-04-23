@@ -15,8 +15,6 @@ output: training and test mean and std_deviation for the classifier from cross v
 details: Use either from main or as helper in get_means
 '''
 def get_mean(X,y):
-    #8th classifier has no positive examples?
-
     clf_i = SVC(kernel = 'linear', class_weight = 'balanced')
     test_scores = []
     train_scores = []
@@ -92,31 +90,31 @@ def main():
     text_array = pre.get_all_text()
     word_counts, length = pre.get_text_dictionary(text_array)
     
-    X = pre.create_X_data(text_array, word_counts, 12, 15)
+    X = pre.create_X_data(text_array, word_counts, 15, 15)
     y = pre.create_y_data()
 
     test_means, train_means, test_stds, train_stds = get_means(X,y)
-    print test_means
-    '''wordNums = np.arange(0,100)
-    bestmeans = [0,0,0,0,0,0,0,0,0,0,0,0]
-    bestNum = [0,0,0,0,0,0,0,0,0,0,0,0]
-    for wordNum in wordNums:
-        X = pre.create_X_data(text_array, word_counts, wordNum, 15)
-        y = pre.create_y_data()
+    
+    rVals = [1,5,10,15,20]
+    entropies, bestRndx = getEntropyDict(rVals)
 
-        test_means, train_means, test_stds, train_stds = get_means(X,y)
-
-
-        #plot(test_means, train_means, test_stds, train_stds)
-        for i in range(len(bestmeans)):
-            if bestmeans[i]<=test_means[i]:
-                bestmeans[i] = test_means[i]
-                bestNum[i]=wordNum
-        #print test_means
-        #print train_means
-
-        print best_means 
-        print bestNum'''
+    for i in range(len(y)):
+        wordEntropies = entropies[i]
+        #Adjust wordEntropies
+        for key in wordEntropies.keys():
+            wordEntropies[key] = wordEntropies[key][bestRndx[i]]
+        test_means = []
+        train_means = []
+        test_std = []
+        train_std = []
+        for d in arange(1,100,5):
+            X = pre.create_X_data(text_array, wordEntropies, d, rVals[bestRndx[i]], True)
+            test_mean, train_mean, test_std, train_std = get_mean(X,y[:,i])
+            test_means.append(test_mean)
+            train_means.append(train_mean)
+            test_std.append(test_std)
+            train_std.append(train_std)
+        plot(test_means, train_means, test_stds, train_stds)
 
 
 if __name__ == "__main__" :
