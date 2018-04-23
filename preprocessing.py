@@ -424,25 +424,26 @@ def plot_word_differences(text_array, labels_array, k):
 # create X and y data
 ######################################################################
 
-def create_X_data(text_array, word_counts, d, j):
+def create_X_data(text_array, word_counts, d, j, use_entropy = False):
 	"""
-	Takes in a text_array, word_counts, d, and j.
-	Creates X vector by using d most used words in dictionary as features.
+	Takes in a text_array, word_counts, d, j, and a boolean use_entropy
+	Creates X vector by using d most used words in dictionary as features. If use_entropy is true uses d 'least entropy' words
 	Entry i,k in X has a 1 if the text for xml file i uses the word k at least j times.
 
 	Parameters
 	--------------------
 			text_array			-- array of string arrays representing words from xml
-			word_counts			-- dictionary of word counts in xml files
+			word_counts			-- dictionary of word counts in xml files (or word entropies)
 			d 					-- number of words to use as features
 			j 					-- number of words in xml file to get a 1 as a feature
+			use_entropy         -- boolean determining how the top words are chosen, by usage or entropy
 
 	Returns
 	--------------------
 			feature_matrix		-- np array of shape (202, d) representing features 
 	"""
 	n = len(text_array)
-	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse=True) # sort words by appearances
+	sorted_counts = sorted(word_counts.iteritems(),key=lambda (k,v): v,reverse= not use_entropy) # sort words by appearances
 
 	words = [sorted_counts[i][0] for i in range(d)] # get d most used words
 	feature_matrix = np.zeros((n, d)) # create feature matrix
