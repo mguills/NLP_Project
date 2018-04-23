@@ -477,8 +477,7 @@ def create_diagnosis_list(k):
 				if diagnosis[0] == 'present' or diagnosis[0] == 'N/A':
 					diagList.append(diagnosis[1])
 	return diagList
-			
-
+		
 def create_CLAMP_data_diag(k):
 	"""
 		Parameter k is the number of semantics we wish to include in our dataset -- we ordered 
@@ -530,10 +529,6 @@ def main() :
 
 #if __name__ == "__main__" :
 #	main()
-
-X_ = create_CLAMP_data_diag(1)
-for i in range(len(X_)):
-	print i, X_[i]
 
 #for i in range(len(SEMANTICS)):
 #	print "Num Semantics: ", i, "\n", "Feature Space: ",  create_CLAMP_data_diag(i)

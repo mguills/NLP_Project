@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from sklearn.dummy import DummyClassifier
 from sklearn import model_selection
-
+import operator
 def entropy(y):
 	if(len(y) == 0):
 		return 0
@@ -72,3 +72,34 @@ def getEntropyDict():
 
 
 	return allEntropies
+
+
+
+
+
+
+
+
+
+def getClampEntropy():
+	y = pre.create_y_data()
+	kval_Dict= {}
+	for i in range(7):
+		allEntropies = []
+		diagList = pre.create_diagnosis_list(i)
+		X = pre.create_CLAMP_data_diag(i)
+		for label in range(len(y)):
+			entropyDict = {}
+			for diagnosis in range(len(X[0])):
+				print diagnosis
+				e = conditional_entropy(X[:, diagnosis], y[:, label])
+				entropyDict[diagList[diagnosis]] = e
+			sorted_entropy = sorted(entropyDict.items(), key=operator.itemgetter(1))
+			allEntropies.append(sorted_entropy)
+		kval_Dict[i] = allEntropies
+	return kval_Dict
+
+print getClampEntropy()
+
+
+			
