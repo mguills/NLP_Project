@@ -47,6 +47,8 @@ output: training and test mean and std_deviation for the classifier from cross v
 details: Use either from main or as helper in get_means
 '''
 def get_mean(X,y):
+    #8th classifier has no positive examples?
+
     clf_i = SVC(kernel = 'linear', class_weight = 'balanced')
     test_scores = []
     train_scores = []
@@ -154,6 +156,7 @@ def main():
     print "Did testing by Commonality"
     
     rVals = [1,5,10,15,20]
+
     entropies, bestRndx = getEntropyDict(rVals)
     print "Have entropies"
 

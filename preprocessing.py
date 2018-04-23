@@ -17,8 +17,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
 
-
-
+SEMANTICS = ["problem" , "treatment", "test", "drug", "labvalue", "BDL","SEV", "COU"]
 ######################################################################
 # extracting tokens from xml
 ######################################################################
@@ -107,6 +106,18 @@ def get_all_labels_from_xml():
 		labels_array.append(get_labels_from_xml(os.path.join("train", filename)))
 
 	return labels_array
+
+def generate_clamp_files():
+	"""
+	Generates the CLAMP files from the text medical records. Make sure to adjust the input and output 
+	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
+	"""
+	path = os.getcwd()
+	path += '/ClampCmd_1.4.0'
+	os.chdir(path)
+	os.system('pwd')
+	os.system('./run_ner_pipeline.sh')
+	os.system('./run_attribute_pipeline.sh')
 
 
 ######################################################################
@@ -310,6 +321,33 @@ def get_wordnet_pos(treebank_tag):
 	else:
 		return wordnet.NOUN
 
+def semantic_list():
+	semantic_dict = {}
+	for file in os.listdir("ClampCmd_1.4.0/attribute_output"):
+		semantics = {"drug":[] , "treatment": [], "test": [], "problem": [], "temporal":[],  "BDL": [], "SEV": [] , "labvalue" : [], "COU" : []}
+		if '.txt' in file: #only dealing with the txt files not xmi files 
+			text = open("ClampCmd_1.4.0/attribute_output/" + file).readlines()
+			for line in text:
+				for key in semantics.keys():
+					tag = 'semantic=' + key
+					if tag in line and 'NamedEntity' in line:
+						finalLine = []
+						line = line.split('\t')
+						assertion = ''
+						diagnosis = ''
+						for item in line:
+							if "assertion=" in item:
+								assertion = item[10:].strip()
+							if "ne=" in item:
+								diagnosis = item[3:].strip()
+							if diagnosis != '':
+								if assertion == '':
+									finalLine.append(("N/A", diagnosis))
+								else:
+									finalLine.append ((assertion,diagnosis))
+						semantics[key] += finalLine
+			semantic_dict[str(file)] = semantics
+	return semantic_dict
 
 ######################################################################
 # data visualization
@@ -486,19 +524,47 @@ def create_tfidf_data(d):
 	text_dict = get_text_for_tfidf()
 	tfidf = TfidfVectorizer(max_features=d).fit(text_dict.values())
 	tfs = tfidf.fit_transform(text_dict.values())
+
+	return tfs
+
+def create_diagnosis_list(k):
+	"""
+		k is the number of semantics we wish to explore 
+	"""
+	semantic_dict = semantic_list()
+	diagList = []
+	for file in semantic_dict:
+		for i in range(k):
+			for diagnosis in semantic_dict[file][SEMANTICS[i]]:
+				if diagnosis[0] == 'present' or diagnosis[0] == 'N/A':
+					diagList.append(diagnosis[1])
+	return diagList
+		
+def create_CLAMP_data_diag(k):
+	"""
+		Parameter k is the number of semantics we wish to include in our dataset -- we ordered 
+		them in what we believed to be the most effective order 
+	"""
+	semantic_dict = semantic_list()
+	y = create_y_data()
+	n,d = y.shape
+	diagList = create_diagnosis_list(k)
+	X = np.empty((n, len(diagList)))
+	for i in range(n):
+		featureList = np.zeros(len(diagList))
+		curFile = "filenum" + str(i) + ".txt"
+		for j in range(k):
+			for diagnosis in semantic_dict[curFile][SEMANTICS[j]]:
+				if diagnosis[0] == 'present' or diagnosis[0] == 'N/A':
+					index = diagList.index(diagnosis[1])
+					featureList[index] = 1
+		X[i] = featureList
+	return X
+
+
+
+
 	
-	return tfs.toarray()
-def generate_clamp_files():
-	"""
-	Generates the CLAMP files from the text medical records. Make sure to adjust the input and output 
-	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
-	"""
-	path = os.getcwd()
-	path += '/ClampCmd_1.4.0'
-	os.chdir(path)
-	os.system('pwd')
-	os.system('./run_ner_pipeline.sh')
-	os.system('./run_attribute_pipeline.sh')
 
 
 def get_semantic_list():
@@ -529,7 +595,9 @@ def get_semantic_list():
 						semantics[key] += finalLine
 			semantic_dict[str(file)] = semantics
 	return semantic_dict
-
+######################################################################
+# MAIN
+######################################################################
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
@@ -551,5 +619,8 @@ def main() :
 
 
 
-if __name__ == "__main__" :
-	main()
+#if __name__ == "__main__" :
+#	main()
+
+#for i in range(len(SEMANTICS)):
+#	print "Num Semantics: ", i, "\n", "Feature Space: ",  create_CLAMP_data_diag(i)
