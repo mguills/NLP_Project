@@ -18,6 +18,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from nltk.corpus import stopwords
 
 
+
 ######################################################################
 # extracting tokens from xml
 ######################################################################
@@ -527,7 +528,6 @@ def get_semantic_list():
 						semantics[key] += finalLine
 			semantic_dict[str(file)] = semantics
 	return semantic_dict
-
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
