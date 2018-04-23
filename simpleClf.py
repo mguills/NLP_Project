@@ -21,9 +21,10 @@ def get_AUROC(X,y):
         y_train = np.append(y[:20*i],y[20*(i+1):],axis = 0)
         X_test = X[20*i:20*(i+1)]
         y_test = y[20*i:20*(i+1)]
-        
+        print X_train.shape
+        print y_train.shape
         clf_i.fit(X_train,y_train)
-        y_score = clf_i.decision_function()
+        y_score = clf_i.decision_function(X_train)
         AUROC = metrics.roc_auc_score(y, y_score())
         test_scores.append(clf_i.score(X_test,y_test))
         train_scores.append(clf_i.score(X_train, y_train))
