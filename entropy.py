@@ -42,7 +42,7 @@ def get_X_label(word, r, text_array):
 			X[i] = 1
 	return X
 
-def getEntropyDict():
+def getEntropyDict(rVals):
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
 	text_array = pre.get_all_text()
@@ -56,29 +56,24 @@ def getEntropyDict():
 	for i in range(len(uniqueWords)):
 		uniqueWords[i] = uniqueWords[i][0]
 
-	rVals = [15]
-
 	allEntropies = []
+	bestRndx = np.zeros((len(y[0])))
 	for label in range(len(y[0])):
 		entropyDict = {}
+		avgs = [0 for i in range(len(rVals))]
 		for word in uniqueWords:
-			r_entropies = np.zeros((5,))
+			r_entropies = np.zeros((len(rVals),))
 			for i,r in enumerate(rVals):
 				X = get_X_label(word, r, text_array)
 				e = conditional_entropy(X,y[:,label])
 				r_entropies[i] = e
+				avgs[i] += e
 			entropyDict[word] = r_entropies
+		for avg in avgs: avg = 1.0*avg/len(uniqueWords)
 		allEntropies.append(entropyDict)
+		bestRndx[label] = np.argmin(avgs)
 
-
-	return allEntropies
-
-
-
-
-
-
-
+	return allEntropies, bestRndx
 
 
 def getClampEntropy():
@@ -99,7 +94,3 @@ def getClampEntropy():
 		kval_Dict[i] = allEntropies
 	return kval_Dict
 
-print getClampEntropy()
-
-
-			
