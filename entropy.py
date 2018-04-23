@@ -56,7 +56,7 @@ def getEntropyDict(rVals):
 		uniqueWords[i] = uniqueWords[i][0]
 
 	allEntropies = []
-	bestRndx = np.zeros((len(y[0])))
+	bestRndx = [0 for i in range(len(y[0]))]
 	for label in range(len(y[0])):
 		entropyDict = {}
 		avgs = [0 for i in range(len(rVals))]
