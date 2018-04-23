@@ -286,6 +286,11 @@ def create_clamp_data_word(labels_array):
 			print "Largest disparities for not met in " + tag_names[i] + " " + semantic + ": "
 			print sorted(not_differences.iteritems(), key=lambda (k,v): v, reverse=True)[:5]
 
+def cond_entropy():
+	"""
+	"""
+	
+	
 def get_word_differences(word_counts_met, word_counts_not):
 	"""
 	Gets differences in word counts
@@ -477,13 +482,13 @@ def create_y_data():
 
 	return label_matrix
 
-def create_tfidf_data():
+def create_tfidf_data(n):
 	"""
 	Creates a 202x15 matrix. Each entry (i,j) gives the tfidf of word j in 
-	file number i. 
+	file number i. n gives the number of features to use.
 	"""
 	text_dict = get_text_for_tfidf()
-	tfidf = TfidfVectorizer(max_features=15)
+	tfidf = TfidfVectorizer(max_features=n).fit(text_dict)
 	tfs = tfidf.fit_transform(text_dict.values())
 
 	return tfs
@@ -499,6 +504,7 @@ def generate_clamp_files():
 	os.system('pwd')
 	os.system('./run_ner_pipeline.sh')
 	os.system('./run_attribute_pipeline.sh')
+
 
 def get_semantic_list():
 	semantic_dict = {}
