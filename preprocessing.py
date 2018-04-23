@@ -286,11 +286,6 @@ def create_clamp_data_word(labels_array):
 			print "Largest disparities for not met in " + tag_names[i] + " " + semantic + ": "
 			print sorted(not_differences.iteritems(), key=lambda (k,v): v, reverse=True)[:5]
 
-def cond_entropy():
-	"""
-	"""
-	
-	
 def get_word_differences(word_counts_met, word_counts_not):
 	"""
 	Gets differences in word counts
