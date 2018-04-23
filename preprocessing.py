@@ -487,12 +487,11 @@ def create_CLAMP_data_diag(k):
 	semantic_dict = semantic_list()
 	y = create_y_data()
 	n,d = y.shape
-	X = [[]] * n
 	diagList = create_diagnosis_list(k)
+	X = np.empty((n, len(diagList)))
 	for i in range(n):
-		featureList = [0] * len(diagList)
+		featureList = np.zeros(len(diagList))
 		curFile = "filenum" + str(i) + ".txt"
-		semantics = semantic_dict[curFile]
 		for j in range(k):
 			for diagnosis in semantic_dict[curFile][SEMANTICS[j]]:
 				if diagnosis[0] == 'present' or diagnosis[0] == 'N/A':
