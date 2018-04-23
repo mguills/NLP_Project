@@ -103,6 +103,3 @@ def getMinEntropies(kval_Dict, n_words):
 			currentEntropies[classifierVals] = kval_Dict[i+1][classifierVals][:n_words]
 		bestEntropies[i] = currentEntropies	
 	return bestEntropies
-
-kvals = getClampEntropy()
-print getMinEntropies(kvals, 5)
