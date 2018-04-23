@@ -516,16 +516,16 @@ def create_y_data():
 
 	return label_matrix
 
-def create_tfidf_data(d):
+def create_tfidf_data(vocab):
 	"""
 	Creates a 202xd matrix. Each entry (i,j) gives the tfidf of word j in 
 	file number i. d gives the number of features to use.
 	"""
 	text_dict = get_text_for_tfidf()
-	tfidf = TfidfVectorizer(max_features=d).fit(text_dict.values())
+	tfidf = TfidfVectorizer(vocabulary=vocab).fit(text_dict.values())
 	tfs = tfidf.fit_transform(text_dict.values())
-
-	return tfs
+	
+	return tfs.toarray()
 
 def create_diagnosis_list(k):
 	"""
@@ -561,12 +561,6 @@ def create_CLAMP_data_diag(k):
 		X[i] = featureList
 	return X
 
-
-
-
-	
-
-
 def get_semantic_list():
 	semantic_dict = {}
 	for file in os.listdir("ClampCmd_1.4.0/attribute_output"):
@@ -595,14 +589,15 @@ def get_semantic_list():
 						semantics[key] += finalLine
 			semantic_dict[str(file)] = semantics
 	return semantic_dict
+
 ######################################################################
 # MAIN
 ######################################################################
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
-	labels_array = get_all_labels_from_xml() # run once to get labels from xml files
+	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
-	write_labels_to_files(labels_array) # run once to save labels from xml files to disk
+	# write_labels_to_files(labels_array) # run once to save labels from xml files to disk
 	# text_array = get_all_text()
 	# labels_array = get_all_labels()
 	# create_clamp_data_word(labels_array)
