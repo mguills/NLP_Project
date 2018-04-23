@@ -7,6 +7,32 @@ import matplotlib.pyplot as plt
 from sklearn.svm import SVC
 from sklearn.dummy import DummyClassifier
 from sklearn import model_selection
+from sklearn import metrics
+
+from entropy import getEntropyDict
+
+
+def get_AUROC(X,y):
+    clf_i = SVC(kernel = 'linear', class_weight = 'balanced')
+    test_scores = []
+    train_scores = []
+    for i in range(10):
+        X_train = np.append(X[:20*i],X[20*(i+1):],axis = 0)
+        y_train = np.append(y[:20*i],y[20*(i+1):],axis = 0)
+        X_test = X[20*i:20*(i+1)]
+        y_test = y[20*i:20*(i+1)]
+        
+        clf_i.fit(X_train,y_train)
+        y_score = clf_i.decision_function()
+        AUROC = metrics.roc_auc_score(y, y_score())
+        test_scores.append(clf_i.score(X_test,y_test))
+        train_scores.append(clf_i.score(X_train, y_train))
+            
+        test_mean = np.mean(test_scores)
+        test_std = np.std(test_scores)
+        train_mean = np.mean(train_scores)
+        train_std = np.std(train_scores)
+    return test_mean, train_mean, test_std, train_std
 
 
 '''
@@ -28,10 +54,10 @@ def get_mean(X,y):
         test_scores.append(clf_i.score(X_test,y_test))
         train_scores.append(clf_i.score(X_train, y_train))
             
-        test_mean = np.mean(test_scores)
-        test_std = np.std(test_scores)
-        train_mean = np.mean(train_scores)
-        train_std = np.std(train_scores)
+    test_mean = np.mean(test_scores)
+    test_std = np.std(test_scores)
+    train_mean = np.mean(train_scores)
+    train_std = np.std(train_scores)
     return test_mean, train_mean, test_std, train_std
 
     '''
@@ -109,11 +135,9 @@ def main():
         train_std = []
         for d in arange(1,100,5):
             X = pre.create_X_data(text_array, wordEntropies, d, rVals[bestRndx[i]], True)
-            test_mean, train_mean, test_std, train_std = get_mean(X,y[:,i])
+            test_mean, test_std = get_AUROC(X,y[:,i])
             test_means.append(test_mean)
-            train_means.append(train_mean)
             test_std.append(test_std)
-            train_std.append(train_std)
         plot(test_means, train_means, test_stds, train_stds)
 
 
