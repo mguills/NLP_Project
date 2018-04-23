@@ -11,8 +11,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import wordnet
 from nltk.stem.wordnet import WordNetLemmatizer
 lemmatizer = WordNetLemmatizer()
+
+
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
+
 
 
 ######################################################################
@@ -429,12 +432,12 @@ def generate_clamp_files():
 	variables within run_attribute_pipeline.sh and run_ner_pipeline.sh
 	"""
 	path = os.getcwd()
-    path += '/ClampCmd_1.4.0'
-    os.chdir(path)
-    newPath = os.getcwd()
-    os.system('pwd')
-    os.system('./run_ner_pipeline.sh')
-    os.system('./run_attribute_pipeline.sh')
+	path += '/ClampCmd_1.4.0'
+	os.chdir(path)
+	newPath = os.getcwd()
+	os.system('pwd')
+	os.system('./run_ner_pipeline.sh')
+	os.system('./run_attribute_pipeline.sh')
 
 def main() :
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
