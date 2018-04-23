@@ -106,6 +106,26 @@ def plot(test_means,train_means,test_stds,train_stds):
 
     return test_means,train_means
 
+def plot2(test_means,test_stds, y_label):
+    N = len(test_means)
+
+    ind = np.arange(N)  # the x locations for the groups
+    width = 0.35       # the width of the bars
+
+    fig, ax = plt.subplots()
+    rects1 = ax.bar(ind, test_means, width, color='r', yerr=test_stds)
+
+    # add some text for labels, title and axes ticks
+    ax.set_ylabel('AUROC')
+    ax.set_title('AUROC by Dimension')
+    ax.set_xticks((ind + width))
+
+    plt.title("AUROC vs. Dimension for classifier" + str(y_label))
+
+    plt.show()
+
+    return test_means
+
 def main():
     np.random.seed(1234)
     # text_array = get_all_text_from_xml() # run once to get text from xml files
@@ -133,9 +153,7 @@ def main():
             test_mean, test_std = get_AUROC(X,y[:,i])
             test_means.append(test_mean)
             test_stds.append(test_std)
-        print "for label", i, "Average AUROC is:", test_means
-        print 'with a maximum at d = ', np.arange(1,100,5)[np.argmax(test_means)]
-
+        plot2(test_means, test_stds, i)
 
 if __name__ == "__main__" :
     main()
