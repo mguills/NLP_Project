@@ -17,7 +17,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 # nltk.download("stopwords")
 from nltk.corpus import stopwords
 
-SEMANTICS = ["problem" , "treatment", "test", "drug", "labvalue", "BDL","SEV", "COU"]
+SEMANTICS = ["problem", "treatment", "test", "drug", "labvalue", "BDL", "SEV", "COU"]
+
+TAG_NAMES = ["ABDOMINAL", "ADVANCED-CAD", "ALCOHOL-ABUSE", "ASP-FOR-MI",
+				"CREATININE", "DRUG-ABUSE", "ENGLISH", "HBA1C", 
+				"MAJOR-DIABETES", "MAKES-DECISIONS", "MI-6MOS"]
 ######################################################################
 # extracting tokens from xml
 ######################################################################
@@ -124,7 +128,7 @@ def generate_clamp_files():
 # text preprocessing
 ######################################################################
 
-def get_all_text():
+def get_all_text(clamp=False):
 	"""
 	Gets all text from train_text directory
 	"""
@@ -134,7 +138,10 @@ def get_all_text():
 		if filename.startswith('filenum'):
 			file = open(os.path.join("train_text", filename), "r")
 			words = file.read()
-			text_array.append(word_tokenize(words)) # append words from file to text_array
+			if clamp:
+				text_array.append(words)
+			else:
+				text_array.append(word_tokenize(words)) # append words from file to text_array
 
 	return text_array
 
@@ -593,7 +600,8 @@ def get_semantic_list():
 ######################################################################
 # MAIN
 ######################################################################
-def main() :
+def main():
+	pass
 	# text_array = get_all_text_from_xml() # run once to get text from xml files
 	# labels_array = get_all_labels_from_xml() # run once to get labels from xml files
 	# write_text_to_files(text_array) # run once to save text from xml files to disk
